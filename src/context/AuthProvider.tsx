@@ -1,10 +1,11 @@
-import { useEffect, useReducer, type ReactNode } from "react";
+import { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
-import { INITIAL_STATE } from "../utils/constans";
 import { Reduceers } from "./Reducers";
 import { authService } from "../services/authService";
+import { INITIAL_STATE } from "../utils/constans";
+import type { WithChildren } from "../utils/types";
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children }: WithChildren) {
   const [state, dispatch] = useReducer(Reduceers, INITIAL_STATE);
 
   // verificacion de usuario
@@ -23,5 +24,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return unsubscribe;
   }, []);
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+  const setLoading = (value: boolean) => {
+    dispatch({ type: "SET_LOADING", payload: value });
+  };
+
+  return <AuthContext.Provider value={{ ...state, setLoading }}>{children}</AuthContext.Provider>;
 }

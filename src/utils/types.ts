@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 // Tipos de estado
 export interface User {
   name?: string;
@@ -10,6 +12,10 @@ export interface State {
   loading: boolean;
 }
 
+export type AuthContextType = State & {
+  setLoading: (value: boolean) => void;
+};
+
 // Tipos de acciones
 export type Action =
   | { type: "ADD_USER"; payload: User }
@@ -17,3 +23,7 @@ export type Action =
   | { type: "REMOVE_USER" }
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "CLEAN_STATE" };
+
+export interface WithChildren {
+  children: ReactNode;
+}

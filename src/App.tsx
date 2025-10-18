@@ -3,6 +3,7 @@ import { Home } from "./pages/Home";
 import { Layount } from "./components/Layount";
 import { AuthProvider } from "./context/AuthProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -19,8 +20,7 @@ function App() {
             }
           />
         </Route>
-        <Route path="login" element={<h1>Login</h1>} />
-        <Route path="register" element={<h1>Register</h1>} />
+        <Route path="account" element={<Account />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </AuthProvider>

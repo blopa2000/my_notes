@@ -1,6 +1,11 @@
-import { onAuthStateChanged } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { auth, db } from "../firebase/config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import type { User } from "../utils/types";
 
 export const authService = {
@@ -17,5 +22,22 @@ export const authService = {
     });
 
     return unsubscribe;
+  },
+
+  async signInRequest(email: string, password: string) {
+    return await signInWithEmailAndPassword(auth, email, password);
+  },
+
+  async signOutRequest() {
+    return await auth.signOut();
+  },
+
+  async signupRequest(email: string, password: string, name: string) {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return await setDoc(doc(db, "users", userCredential.user.uid), { email, name });
+  },
+
+  resetPasswordRequest(email: string) {
+    return sendPasswordResetEmail(auth, email);
   },
 };
