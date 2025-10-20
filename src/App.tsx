@@ -1,13 +1,21 @@
 import { Routes, Route } from "react-router";
 import { Home } from "./pages/Home";
 import { Layount } from "./components/Layount";
-import { AuthProvider } from "./context/AuthProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Account from "./pages/Account";
+import Loading from "./components/Loading";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
+  const { loading } = useAuth();
+  console.log(loading);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <AuthProvider>
+    <div>
       <Routes>
         <Route path="/" element={<>landing page</>} />
         <Route path="dashboard" element={<Layount />}>
@@ -23,7 +31,7 @@ function App() {
         <Route path="account" element={<Account />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
-    </AuthProvider>
+    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
 const Account = () => {
-  const { setLoading, user } = useAuth();
+  const { setLoading, user, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
 
@@ -55,6 +55,8 @@ const Account = () => {
       navigate("/dashboard");
     }
   }, [user, navigate]);
+
+  if (loading) return null;
 
   return (
     <div className="account-page">

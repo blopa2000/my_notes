@@ -18,10 +18,13 @@ export function AuthProvider({ children }: WithChildren) {
       } else {
         //  logout();
       }
-      dispatch({ type: "SET_LOADING", payload: false });
     });
 
-    return unsubscribe;
+    const timer = setTimeout(() => dispatch({ type: "SET_LOADING", payload: false }), 2000);
+    return () => {
+      clearTimeout(timer);
+      unsubscribe();
+    };
   }, []);
 
   const setLoading = (value: boolean) => {
