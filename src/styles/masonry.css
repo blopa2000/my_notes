@@ -1,0 +1,19 @@
+.my-masonry-grid {
+  display: flex;
+  margin: 16px 9rem;
+  width: auto;
+  justify-content: center;
+}
+
+.my-masonry-grid_column {
+  background-clip: padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: anchor-center;
+}
+
+@media (max-width: 900px) {
+  .my-masonry-grid {
+      margin: 0
+    }
+}

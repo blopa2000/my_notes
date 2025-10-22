@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { authService } from "../services/authService";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth/AuthContext";
 import { useNavigate } from "react-router";
 
 const Account = () => {

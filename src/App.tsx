@@ -4,11 +4,11 @@ import { Layount } from "./components/Layount";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Account from "./pages/Account";
 import Loading from "./components/Loading";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/auth/AuthContext";
+import EditNote from "./pages/EditNote";
 
 function App() {
   const { loading } = useAuth();
-  console.log(loading);
 
   if (loading) {
     return <Loading />;
@@ -24,6 +24,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="edit"
+            element={
+              <ProtectedRoute>
+                <EditNote />
               </ProtectedRoute>
             }
           />

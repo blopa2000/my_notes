@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { Reduceers } from "./Reducers";
-import { authService } from "../services/authService";
-import { INITIAL_STATE } from "../utils/constans";
-import type { WithChildren } from "../utils/types";
+import { authService } from "../../services/authService";
+import { INITIAL_STATE } from "../../utils/constans";
+import type { WithChildren } from "../../utils/types";
 
 export function AuthProvider({ children }: WithChildren) {
   const [state, dispatch] = useReducer(Reduceers, INITIAL_STATE);
@@ -16,7 +16,7 @@ export function AuthProvider({ children }: WithChildren) {
       if (user) {
         dispatch({ type: "ADD_USER", payload: user });
       } else {
-        //  logout();
+        cleadState();
       }
     });
 
@@ -31,5 +31,13 @@ export function AuthProvider({ children }: WithChildren) {
     dispatch({ type: "SET_LOADING", payload: value });
   };
 
-  return <AuthContext.Provider value={{ ...state, setLoading }}>{children}</AuthContext.Provider>;
+  const cleadState = () => {
+    dispatch({ type: "CLEAN_STATE" });
+  };
+
+  return (
+    <AuthContext.Provider value={{ ...state, setLoading, cleadState }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }

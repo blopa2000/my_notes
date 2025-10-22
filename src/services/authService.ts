@@ -4,16 +4,16 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth, db } from "../firebase/config";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth } from "../firebase/config";
 import type { User } from "../utils/types";
+import { userServices } from "./userServices";
 
 export const authService = {
   subscribeToAuthState(callback: (user: (User & { uid: string }) | null) => void) {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) return callback(null);
 
-      const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+      const userDoc = await userServices.getUser(currentUser.uid);
       if (userDoc.exists()) {
         callback({ uid: currentUser.uid, ...(userDoc.data() as User) });
       } else {
@@ -34,7 +34,7 @@ export const authService = {
 
   async signupRequest(email: string, password: string, name: string) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    return await setDoc(doc(db, "users", userCredential.user.uid), { email, name });
+    return await userServices.createUser({ email, name }, userCredential.user.uid);
   },
 
   resetPasswordRequest(email: string) {

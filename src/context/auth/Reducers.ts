@@ -1,5 +1,5 @@
-import { INITIAL_STATE } from "../utils/constans";
-import type { Action, State } from "../utils/types";
+import { INITIAL_STATE } from "../../utils/constans";
+import type { Action, State } from "../../utils/types";
 
 export const Reduceers = (state: State = INITIAL_STATE, action: Action) => {
   const { type } = action;

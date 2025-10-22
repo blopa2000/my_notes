@@ -12,8 +12,13 @@ export interface State {
   loading: boolean;
 }
 
+export interface WithChildren {
+  children: ReactNode;
+}
+
 export type AuthContextType = State & {
   setLoading: (value: boolean) => void;
+  cleadState: () => void;
 };
 
 // Tipos de acciones
@@ -24,6 +29,11 @@ export type Action =
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "CLEAN_STATE" };
 
-export interface WithChildren {
-  children: ReactNode;
-}
+export type Note = {
+  noteId: string;
+  title: string;
+  content: string;
+  lastUpdate: string;
+  creationDate: string;
+  bgColor: string;
+};

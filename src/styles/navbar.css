@@ -5,6 +5,13 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.navbar-title-link {
+  text-decoration: none;
+  color: #F8F8F8;
+}
+
+
 .navbar-container {
   position: relative;
   display: inline-block;

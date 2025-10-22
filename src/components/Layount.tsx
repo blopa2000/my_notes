@@ -5,7 +5,6 @@ export const Layount = () => {
   return (
     <div>
       <Navbar />
-      Layount
       <Outlet />
     </div>
   );
