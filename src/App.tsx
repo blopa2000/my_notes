@@ -35,6 +35,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="add-note"
+            element={
+              <ProtectedRoute>
+                <NoteForm />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         <Route path="account" element={<Account />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />

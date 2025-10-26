@@ -1,4 +1,4 @@
-.editor-wrapper {
+/* .editor-wrapper {
   width: 100%;
 }
 
@@ -254,4 +254,23 @@
 .editor-content {
   overflow-y: scroll;
   height: 65vh; 
+  min-height: 150px;
+  padding: 1rem;
+  outline: none;
+}
+
+.editor-content.is-editor-empty::before {
+  content: attr(data-placeholder);
+  color: #888;
+  pointer-events: none;
+  height: 0;
+  float: left;
+} 
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #888;
+  float: left;
+  height: 0;
+  pointer-events: none;
 }

@@ -90,7 +90,7 @@ const TiptapEditor = ({ value, onChange }: TiptapEditorProps) => {
         lowlight,
       }),
       Placeholder.configure({
-        placeholder: "Escribe aquí...",
+        placeholder: "Mi nota...",
       }),
     ],
     content: value,
@@ -127,8 +127,8 @@ const TiptapEditor = ({ value, onChange }: TiptapEditorProps) => {
 
   // 👇 Cargamos el contenido inicial, ya decodificado
   useEffect(() => {
-    if (editor && value) {
-      const decoded = decodeHTMLEntities(value);
+    if (editor) {
+      const decoded = decodeHTMLEntities(value || "");
       editor.commands.setContent(decoded);
     }
   }, [editor, value]);

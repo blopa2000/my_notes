@@ -1,4 +1,5 @@
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -92,6 +93,37 @@ export const noteService = {
         toDate: () => new Date(),
       };
       return noteService.transformTimestamp(fakeTimestamp as Timestamp);
+    } catch (error) {
+      console.error("Error deleting note:", error);
+      throw error;
+    }
+  },
+  createNote: async (uid: string, note: { title: string; bgColor: string; content: string }) => {
+    try {
+      if (!uid) {
+        throw new Error("User UID is required to delete notes.");
+      }
+
+      const data = {
+        title: note.title,
+        content: note.content,
+        bgColor: note.bgColor,
+        creationDate: Timestamp.now(),
+        timestamp: serverTimestamp(),
+      };
+
+      const res = await addDoc(collection(db, "users", uid, "notes"), data);
+
+      const fakeTimestamp = {
+        toDate: () => new Date(),
+      };
+
+      return {
+        ...data,
+        noteId: res.id,
+        lastUpdate: noteService.transformTimestamp(fakeTimestamp as Timestamp),
+        creationDate: noteService.transformTimestamp(data.creationDate),
+      };
     } catch (error) {
       console.error("Error deleting note:", error);
       throw error;

@@ -11,7 +11,7 @@ const NoteForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { getNoteById, updateNote } = useNotes();
+  const { getNoteById, updateNote, addNote } = useNotes();
   const { noteId } = location.state || {};
 
   const [note, setNote] = useState({
@@ -42,9 +42,10 @@ const NoteForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user?.uid) return null;
     setLoading(true);
     try {
-      if (noteId && user?.uid) {
+      if (noteId) {
         const data = {
           title: note.title,
           bgColor: note.bgColor,
@@ -60,7 +61,12 @@ const NoteForm = () => {
           creationDate: note.creationDate,
         });
       } else {
-        // await noteService.createNote(user!.uid, note);
+        const resNote = await noteService.createNote(user.uid, {
+          ...note,
+          content,
+        });
+
+        addNote(resNote);
       }
       navigate("/dashboard");
     } catch (error) {
@@ -68,8 +74,6 @@ const NoteForm = () => {
     } finally {
       setLoading(false);
     }
-
-    // console.log(content);
   };
 
   const handleContentChange = (html: string) => {
