@@ -1,6 +1,6 @@
-import { db } from "../firebase/config";
+import { db } from "@/firebase/config";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import type { User } from "../utils/types";
+import type { User } from "@/utils/types";
 
 export const userServices = {
   getUser: async (uid: string) => {

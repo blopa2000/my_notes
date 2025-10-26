@@ -7,7 +7,7 @@ export interface User {
   uid?: string;
 }
 
-export interface State {
+export interface StateUser {
   user: User | null;
   loading: boolean;
 }
@@ -16,7 +16,7 @@ export interface WithChildren {
   children: ReactNode;
 }
 
-export type AuthContextType = State & {
+export type AuthContextType = StateUser & {
   setLoading: (value: boolean) => void;
   cleadState: () => void;
 };
@@ -36,4 +36,21 @@ export type Note = {
   lastUpdate: string;
   creationDate: string;
   bgColor: string;
+};
+
+export interface StateNotes {
+  notes: Note[];
+}
+
+export type NotesContextType = StateNotes & {
+  addNote: (note: Note) => void;
+  updateNote: (note: Note) => void;
+  deleteNote: (id: string) => void;
+  setNotes: () => void;
+  getNoteById: (id: string) => Note | undefined;
+};
+
+export type TiptapEditorProps = {
+  value?: string;
+  onChange?: (html: string) => void;
 };

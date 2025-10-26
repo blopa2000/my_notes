@@ -4,8 +4,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../firebase/config";
-import type { User } from "../utils/types";
+import { auth } from "@/firebase/config";
+import type { User } from "@/utils/types";
 import { userServices } from "./userServices";
 
 export const authService = {

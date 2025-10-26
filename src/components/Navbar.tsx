@@ -4,9 +4,11 @@ import { authService } from "../services/authService";
 import "../styles/navbar.css";
 import { useAuth } from "../context/auth/AuthContext";
 import { Link } from "react-router";
+import { useNotes } from "../context/notes/NotesContext";
 
 const Navbar = () => {
   const { setLoading, cleadState } = useAuth();
+  const { setNotes } = useNotes();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -14,6 +16,7 @@ const Navbar = () => {
     try {
       await authService.signOutRequest();
       cleadState();
+      setNotes();
       setLoading(false);
     } catch (error) {
       console.error("Error during logout:", error);

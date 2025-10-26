@@ -1,0 +1,136 @@
+.edit-container {
+  padding: 0px 1rem;
+}
+
+.edit-box {
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.edit-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.back-btn:hover {
+  color: #111;
+}
+
+.back-btn svg{
+  height: 50px;
+  width: 50px;
+}
+
+.edit-title {
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 40px;
+}
+
+
+
+.edit-form .edit-form-title {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.edit-form .edit-form-title:focus {
+  outline: none;
+  background: #fff;
+}
+
+
+.edit-form .edit-form-color {
+  border: 2px solid #c6c6c6;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  top: -95px;
+  right: 1rem;
+}
+
+.edit-form .edit-form-color::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.edit-form .edit-form-color::-webkit-color-swatch {
+  border: none;
+  border: radius 10px;
+}
+
+@media (min-width:1800px) {
+  .edit-container {
+    padding: 0px 20rem;
+  }
+
+}
+
+
+.save-btn {
+  position: absolute;
+  top: -95px;
+  right: 90px;
+  background: #7b61ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  background: #6a50f2;
+}
+
+.save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loading-icon {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}  

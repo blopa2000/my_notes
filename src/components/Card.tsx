@@ -19,7 +19,6 @@ const Card = ({ note }: { note: Note }) => {
   const textColor = getTextColor(bgColor);
 
   const handleCardClick = (id: string) => {
-    console.log("Card clicked:", id);
     navigate(`/dashboard/edit`, { state: { noteId: id } });
   };
 

@@ -1,12 +1,12 @@
 import { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
-import { Reduceers } from "./Reducers";
-import { authService } from "../../services/authService";
-import { INITIAL_STATE } from "../../utils/constans";
-import type { WithChildren } from "../../utils/types";
+import { AuthReduceer } from "./AuthReduceer";
+import { authService } from "@/services/authService";
+import { INITIAL_STATE_AUTH } from "@/utils/constans";
+import type { WithChildren } from "@/utils/types";
 
 export function AuthProvider({ children }: WithChildren) {
-  const [state, dispatch] = useReducer(Reduceers, INITIAL_STATE);
+  const [state, dispatch] = useReducer(AuthReduceer, INITIAL_STATE_AUTH);
 
   // verificacion de usuario
   useEffect(() => {

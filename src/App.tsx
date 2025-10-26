@@ -5,7 +5,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import Account from "./pages/Account";
 import Loading from "./components/Loading";
 import { useAuth } from "./context/auth/AuthContext";
-import EditNote from "./pages/EditNote";
+import NoteForm from "./pages/NoteForm";
 
 function App() {
   const { loading } = useAuth();
@@ -31,7 +31,7 @@ function App() {
             path="edit"
             element={
               <ProtectedRoute>
-                <EditNote />
+                <NoteForm />
               </ProtectedRoute>
             }
           />

@@ -1,11 +1,11 @@
-import { INITIAL_STATE } from "../../utils/constans";
-import type { Action, State } from "../../utils/types";
+import { INITIAL_STATE_AUTH } from "@/utils/constans";
+import type { Action, StateUser } from "@/utils/types";
 
-export const Reduceers = (state: State = INITIAL_STATE, action: Action) => {
+export const AuthReduceer = (state: StateUser = INITIAL_STATE_AUTH, action: Action) => {
   const { type } = action;
   switch (type) {
     case "CLEAN_STATE":
-      return INITIAL_STATE;
+      return INITIAL_STATE_AUTH;
     /**
      * USER
      */
