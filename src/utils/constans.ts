@@ -9,11 +9,16 @@ export const INITIAL_STATE_AUTH: AuthContextType = {
 
 export const INITIAL_STATE_NOTES: NotesContextType = {
   notes: [],
+  handleDelete: {
+    showAlert: false,
+    noteId: "",
+  },
   addNote: () => {},
   updateNote: () => {},
   deleteNote: () => {},
   setNotes: () => {},
   getNoteById: () => undefined,
+  toggleModalDeleteNote: () => {},
 };
 
 export const COLORS_HIGHLIGHT = ["#fdef70ff", "#bcff6fff", "#75d3ffff", "#ffb6ceff", "#f8b95bff"];

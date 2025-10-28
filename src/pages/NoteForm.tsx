@@ -45,30 +45,35 @@ const NoteForm = () => {
     if (!user?.uid) return null;
     setLoading(true);
     try {
-      if (noteId) {
-        const data = {
-          title: note.title,
-          bgColor: note.bgColor,
-          content: content.length > 0 ? content : note.content,
-        };
+      if (note.title.length > 0) {
+        if (noteId) {
+          const data = {
+            title: note.title,
+            bgColor: note.bgColor,
+            content: content.length > 0 ? content : note.content,
+          };
 
-        const lastUpdate = await noteService.updateNote(user.uid, noteId, data);
+          const lastUpdate = await noteService.updateNote(user.uid, noteId, data);
 
-        updateNote({
-          ...data,
-          noteId,
-          lastUpdate,
-          creationDate: note.creationDate,
-        });
+          updateNote({
+            ...data,
+            noteId,
+            lastUpdate,
+            creationDate: note.creationDate,
+          });
+        } else {
+          const resNote = await noteService.createNote(user.uid, {
+            ...note,
+            content,
+          });
+
+          addNote(resNote);
+        }
+        navigate("/dashboard");
       } else {
-        const resNote = await noteService.createNote(user.uid, {
-          ...note,
-          content,
-        });
-
-        addNote(resNote);
+        console.log("titulo es requerido");
+        console.log(content);
       }
-      navigate("/dashboard");
     } catch (error) {
       console.error(error);
     } finally {

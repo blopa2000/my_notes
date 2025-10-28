@@ -2,6 +2,7 @@ import { Palette, Trash } from "lucide-react";
 import "../styles/card.css";
 import type { Note } from "../utils/types";
 import { useNavigate } from "react-router";
+import { useNotes } from "@/context/notes/NotesContext";
 
 const getTextColor = (bgColor: string) => {
   if (!bgColor) return "#222";
@@ -14,12 +15,23 @@ const getTextColor = (bgColor: string) => {
 };
 
 const Card = ({ note }: { note: Note }) => {
+  const { toggleModalDeleteNote } = useNotes();
   const { title, content, lastUpdate, bgColor, noteId } = note;
   const navigate = useNavigate();
   const textColor = getTextColor(bgColor);
 
   const handleCardClick = (id: string) => {
     navigate(`/dashboard/edit`, { state: { noteId: id } });
+  };
+
+  const handleColor = (e: React.FormEvent) => {
+    e.stopPropagation();
+    console.log("color");
+  };
+
+  const handleDeleteNote = (e: React.FormEvent) => {
+    e.stopPropagation();
+    toggleModalDeleteNote({ showAlert: true, noteId });
   };
 
   return (
@@ -35,10 +47,10 @@ const Card = ({ note }: { note: Note }) => {
       </div>
 
       <div className="card-action-Container">
-        <button className="card-btn">
+        <button className="card-btn" onClick={handleColor}>
           <Palette />
         </button>
-        <button className="card-btn delete">
+        <button className="card-btn delete" onClick={handleDeleteNote}>
           <Trash />
         </button>
       </div>

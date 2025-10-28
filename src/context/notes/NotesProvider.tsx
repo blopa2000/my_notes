@@ -3,7 +3,7 @@ import { NotesContext } from "./NotesContext";
 import { NotesReducer } from "./NotesReducer";
 import { noteService } from "@/services/noteService";
 import { useAuth } from "../auth/AuthContext";
-import type { Note, WithChildren } from "@/utils/types";
+import type { handleDelete, Note, WithChildren } from "@/utils/types";
 import { INITIAL_STATE_NOTES } from "@/utils/constans";
 
 export const NotesProvider = ({ children }: WithChildren) => {
@@ -35,9 +35,21 @@ export const NotesProvider = ({ children }: WithChildren) => {
     return note;
   };
 
+  const toggleModalDeleteNote = (payload: handleDelete) => {
+    dispatch({ type: "SET_SHOW_MODAL_DELETE", payload });
+  };
+
   return (
     <NotesContext.Provider
-      value={{ ...state, addNote, updateNote, deleteNote, setNotes, getNoteById }}
+      value={{
+        ...state,
+        addNote,
+        updateNote,
+        deleteNote,
+        setNotes,
+        getNoteById,
+        toggleModalDeleteNote,
+      }}
     >
       {children}
     </NotesContext.Provider>

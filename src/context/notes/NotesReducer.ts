@@ -1,11 +1,12 @@
-import type { Note, StateNotes } from "../../utils/types";
+import type { handleDelete, Note, StateNotes } from "../../utils/types";
 import { INITIAL_STATE_NOTES } from "../../utils/constans";
 
 export type NotesAction =
   | { type: "SET_NOTES"; payload: Note[] }
   | { type: "ADD_NOTE"; payload: Note }
   | { type: "UPDATE_NOTE"; payload: Note }
-  | { type: "DELETE_NOTE"; payload: string };
+  | { type: "DELETE_NOTE"; payload: string }
+  | { type: "SET_SHOW_MODAL_DELETE"; payload: handleDelete };
 
 export const NotesReducer = (
   state: StateNotes = INITIAL_STATE_NOTES,
@@ -33,6 +34,12 @@ export const NotesReducer = (
       return {
         ...state,
         notes: state.notes.filter((n: Note) => n.noteId !== action.payload),
+      };
+    case "SET_SHOW_MODAL_DELETE":
+      return {
+        ...state,
+
+        handleDelete: action.payload,
       };
     default:
       return state;
