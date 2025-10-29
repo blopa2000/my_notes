@@ -38,14 +38,13 @@ export type Note = {
   bgColor: string;
 };
 
-export type handleDelete = {
-  showAlert: boolean;
-  noteId: string;
+export type TypeModalDeleteData = {
+  showModal: boolean;
+  modalNoteId: string;
 };
 
 export interface StateNotes {
   notes: Note[];
-  handleDelete: handleDelete;
 }
 
 export type NotesContextType = StateNotes & {
@@ -54,7 +53,6 @@ export type NotesContextType = StateNotes & {
   deleteNote: (id: string) => void;
   setNotes: () => void;
   getNoteById: (id: string) => Note | undefined;
-  toggleModalDeleteNote: ({ showAlert, noteId }: handleDelete) => void;
 };
 
 export type TiptapEditorProps = {

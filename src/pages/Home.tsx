@@ -2,12 +2,15 @@ import MasonryGrid from "@/components/MasonryGrid";
 import ModalDelete from "@/components/ModalDelete";
 import { useNotes } from "@/context/notes/NotesContext";
 import "@/styles/home.css";
+import { INITIAL_MODAL } from "@/utils/constans";
+import type { TypeModalDeleteData } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 export const Home = () => {
-  const { notes, handleDelete } = useNotes() ?? [];
+  const { notes } = useNotes() ?? [];
   const [search, setSearch] = useState(notes);
+  const [modalData, setModalData] = useState(INITIAL_MODAL);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(
@@ -17,13 +20,22 @@ export const Home = () => {
     );
   };
 
+  const toggleshowModalDelete = (value: TypeModalDeleteData) => {
+    setModalData({
+      showModal: value.showModal,
+      modalNoteId: value.modalNoteId,
+    });
+  };
+
   useEffect(() => {
     setSearch(notes);
   }, [notes]);
 
   return (
     <div>
-      {handleDelete.showAlert && <ModalDelete />}
+      {modalData.showModal && (
+        <ModalDelete toggleshowModalDelete={toggleshowModalDelete} noteId={modalData.modalNoteId} />
+      )}
 
       <div className="actions-container">
         <div className="actions-container-search">
@@ -40,7 +52,7 @@ export const Home = () => {
       </div>
       {search.length === 0 && notes.length > 0 && <div>No veo lo que buscas</div>}
       {notes.length === 0 && <div>No tienes notas, agrega una</div>}
-      <MasonryGrid notes={search} />
+      <MasonryGrid notes={search} toggleshowModalDelete={toggleshowModalDelete} />
     </div>
   );
 };

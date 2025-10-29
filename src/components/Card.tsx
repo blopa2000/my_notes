@@ -1,8 +1,7 @@
 import { Palette, Trash } from "lucide-react";
 import "../styles/card.css";
-import type { Note } from "../utils/types";
+import type { TypeModalDeleteData, Note } from "../utils/types";
 import { useNavigate } from "react-router";
-import { useNotes } from "@/context/notes/NotesContext";
 
 const getTextColor = (bgColor: string) => {
   if (!bgColor) return "#222";
@@ -14,8 +13,12 @@ const getTextColor = (bgColor: string) => {
   return brightness > 150 ? "#222" : "#fff";
 };
 
-const Card = ({ note }: { note: Note }) => {
-  const { toggleModalDeleteNote } = useNotes();
+type TypeCard = {
+  toggleshowModalDelete: (value: TypeModalDeleteData) => void;
+  note: Note;
+};
+
+const Card = ({ toggleshowModalDelete, note }: TypeCard) => {
   const { title, content, lastUpdate, bgColor, noteId } = note;
   const navigate = useNavigate();
   const textColor = getTextColor(bgColor);
@@ -31,7 +34,7 @@ const Card = ({ note }: { note: Note }) => {
 
   const handleDeleteNote = (e: React.FormEvent) => {
     e.stopPropagation();
-    toggleModalDeleteNote({ showAlert: true, noteId });
+    toggleshowModalDelete({ showModal: true, modalNoteId: noteId });
   };
 
   return (

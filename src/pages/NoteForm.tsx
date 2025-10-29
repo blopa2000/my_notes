@@ -95,7 +95,7 @@ const NoteForm = () => {
         </button>
 
         <form className="edit-form" onSubmit={handleSubmit}>
-          <button type="submit" className="save-btn">
+          <button disabled={loading} type="submit" className="save-btn">
             {loading ? <Loader2 className="loading-icon" size={18} /> : <Save size={18} />}
             <span>{noteId ? "Guardar cambios" : "Crear nota"}</span>
           </button>

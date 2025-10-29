@@ -3,9 +3,16 @@ import "@/styles/modalDelete.css";
 import { noteService } from "@/services/noteService";
 import { useAuth } from "@/context/auth/AuthContext";
 import { useEffect, useRef, useState } from "react";
+import type { TypeModalDeleteData } from "@/utils/types";
+import { INITIAL_MODAL } from "@/utils/constans";
 
-function ModalDelete() {
-  const { toggleModalDeleteNote, handleDelete, deleteNote } = useNotes();
+type TypeModalDelete = {
+  toggleshowModalDelete: (value: TypeModalDeleteData) => void;
+  noteId: string;
+};
+
+function ModalDelete({ toggleshowModalDelete, noteId }: TypeModalDelete) {
+  const { deleteNote } = useNotes();
   const { user } = useAuth();
   const [loading, setloading] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -13,23 +20,23 @@ function ModalDelete() {
   const handleDeleteNote = async () => {
     if (user?.uid) {
       setloading(true);
-      await noteService.deleteNote(user?.uid, handleDelete.noteId);
-      deleteNote(handleDelete.noteId);
+      await noteService.deleteNote(user?.uid, noteId);
+      deleteNote(noteId);
       setloading(false);
-      toggleModalDeleteNote({ showAlert: false, noteId: "" });
+      toggleshowModalDelete(INITIAL_MODAL);
     }
   };
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-        toggleModalDeleteNote({ showAlert: false, noteId: "" });
+        toggleshowModalDelete(INITIAL_MODAL);
       }
     };
 
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [toggleModalDeleteNote]);
+  }, [toggleshowModalDelete]);
 
   return (
     <div className="modal-container">
@@ -42,10 +49,7 @@ function ModalDelete() {
           <button disabled={loading} onClick={handleDeleteNote}>
             {loading ? "Cargando..." : "Eliminar Nota"}
           </button>
-          <button
-            disabled={loading}
-            onClick={() => toggleModalDeleteNote({ showAlert: false, noteId: "" })}
-          >
+          <button disabled={loading} onClick={() => toggleshowModalDelete(INITIAL_MODAL)}>
             Cancelar
           </button>
         </div>

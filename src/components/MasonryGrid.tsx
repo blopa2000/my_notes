@@ -1,9 +1,14 @@
 import Masonry from "react-masonry-css";
 import Card from "./Card";
-import type { Note } from "../utils/types";
+import type { TypeModalDeleteData, Note } from "../utils/types";
 import "../styles/masonry.css";
 
-const MasonryGrid = ({ notes }: { notes: Note[] }) => {
+type TypeMasonryGrid = {
+  toggleshowModalDelete: (value: TypeModalDeleteData) => void;
+  notes: Note[];
+};
+
+const MasonryGrid = ({ toggleshowModalDelete, notes }: TypeMasonryGrid) => {
   const breakpointColumnsObj = {
     default: 8,
     2650: 8,
@@ -22,7 +27,7 @@ const MasonryGrid = ({ notes }: { notes: Note[] }) => {
       columnClassName="my-masonry-grid_column"
     >
       {notes.map((note) => (
-        <Card key={note.noteId} note={note} />
+        <Card key={note.noteId} note={note} toggleshowModalDelete={toggleshowModalDelete} />
       ))}
     </Masonry>
   );
