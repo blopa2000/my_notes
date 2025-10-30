@@ -5,7 +5,8 @@ export type NotesAction =
   | { type: "SET_NOTES"; payload: Note[] }
   | { type: "ADD_NOTE"; payload: Note }
   | { type: "UPDATE_NOTE"; payload: Note }
-  | { type: "DELETE_NOTE"; payload: string };
+  | { type: "DELETE_NOTE"; payload: string }
+  | { type: "UPDATE_COLOR_NOTE"; payload: { noteId: string; bgColor: string } };
 
 export const NotesReducer = (
   state: StateNotes = INITIAL_STATE_NOTES,
@@ -34,6 +35,21 @@ export const NotesReducer = (
         ...state,
         notes: state.notes.filter((n: Note) => n.noteId !== action.payload),
       };
+
+    case "UPDATE_COLOR_NOTE": {
+      return {
+        ...state,
+        notes: state.notes.map((n: Note) => {
+          if (n.noteId === action.payload.noteId) {
+            return {
+              ...n,
+              bgColor: action.payload.bgColor,
+            };
+          }
+          return n;
+        }),
+      };
+    }
     default:
       return state;
   }

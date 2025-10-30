@@ -35,6 +35,10 @@ export const NotesProvider = ({ children }: WithChildren) => {
     return note;
   };
 
+  const updateColorNote = (noteId: string, bgColor: string) => {
+    dispatch({ type: "UPDATE_COLOR_NOTE", payload: { noteId, bgColor } });
+  };
+
   return (
     <NotesContext.Provider
       value={{
@@ -44,6 +48,7 @@ export const NotesProvider = ({ children }: WithChildren) => {
         deleteNote,
         setNotes,
         getNoteById,
+        updateColorNote,
       }}
     >
       {children}

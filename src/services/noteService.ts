@@ -129,6 +129,20 @@ export const noteService = {
       throw error;
     }
   },
+  changeColor: async (uid: string, noteId: string, newColor: string) => {
+    try {
+      if (!uid) {
+        throw new Error("User UID is required to delete notes.");
+      }
+
+      await updateDoc(doc(db, "users", uid, "notes", noteId), {
+        bgColor: newColor,
+      });
+    } catch (error) {
+      console.error("Error deleting note:", error);
+      throw error;
+    }
+  },
   transformTimestamp: (timestamp: Timestamp): string => {
     const date = timestamp.toDate().toString().split(" ");
     return date[1] + " " + date[2] + " " + date[3];

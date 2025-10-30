@@ -53,6 +53,7 @@ export type NotesContextType = StateNotes & {
   deleteNote: (id: string) => void;
   setNotes: () => void;
   getNoteById: (id: string) => Note | undefined;
+  updateColorNote: (noteId: string, bgColor: string) => void;
 };
 
 export type TiptapEditorProps = {
