@@ -25,6 +25,19 @@
   border-radius: 20px;
 }
 
+.btn-content{
+  display: flex;
+  justify-content: end;
+}
+
+.btn-X {
+  color: #5d5d5d;
+  background-color: #fff;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+}
+
 .modal-card-actions {
   display: flex;
   justify-content: space-around;

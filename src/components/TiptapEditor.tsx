@@ -318,7 +318,7 @@ const TiptapEditor = ({ value, onChange }: TiptapEditorProps) => {
             <SubscriptIcon />
           </button>
 
-          <div className="menu-color-container">
+          <div style={{ position: "relative" }} className="menu-color-container">
             <button type="button" onClick={() => setShowMenuColors(!showMenuColors)}>
               <HighlighterIcon />
             </button>

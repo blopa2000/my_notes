@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Menu, User, Settings, LogOut } from "lucide-react";
+import { Menu, User, LogOut } from "lucide-react";
 import { authService } from "../services/authService";
 import "../styles/navbar.css";
 import { useAuth } from "../context/auth/AuthContext";
@@ -49,9 +49,9 @@ const Navbar = () => {
           <button className="navbar-item">
             <User /> <h2>Profile</h2>
           </button>
-          <button className="navbar-item">
+          {/* <button className="navbar-item">
             <Settings /> <h2>Settings</h2>
-          </button>
+          </button> */}
           <button className="navbar-item logout" onClick={handleLogout}>
             <LogOut /> <h2>Logout</h2>
           </button>

@@ -5,6 +5,7 @@ import { useAuth } from "@/context/auth/AuthContext";
 import { useEffect, useRef, useState } from "react";
 import type { TypeModalDeleteData } from "@/utils/types";
 import { INITIAL_MODAL } from "@/utils/constans";
+import { X } from "lucide-react";
 
 type TypeModalDelete = {
   toggleshowModalDelete: (value: TypeModalDeleteData) => void;
@@ -41,6 +42,15 @@ function ModalDelete({ toggleshowModalDelete, noteId }: TypeModalDelete) {
   return (
     <div className="modal-container">
       <div className="modal-card" ref={modalRef}>
+        <div className="btn-content">
+          <button
+            className="btn-X"
+            disabled={loading}
+            onClick={() => toggleshowModalDelete(INITIAL_MODAL)}
+          >
+            <X />
+          </button>
+        </div>
         <div className="modal-card-info">
           <h1>Eliminar Nota</h1>
           <p>deseas eliminar esta nota?</p>

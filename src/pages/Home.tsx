@@ -1,5 +1,7 @@
 import MasonryGrid from "@/components/MasonryGrid";
 import ModalDelete from "@/components/ModalDelete";
+import NotFound from "@/components/NotFound";
+import NotNotes from "@/components/NotNotes";
 import { useNotes } from "@/context/notes/NotesContext";
 import "@/styles/home.css";
 import { INITIAL_MODAL } from "@/utils/constans";
@@ -50,8 +52,8 @@ export const Home = () => {
           <Link to="/dashboard/add-Note">Add Note</Link>
         </div>
       </div>
-      {search.length === 0 && notes.length > 0 && <div>No veo lo que buscas</div>}
-      {notes.length === 0 && <div>No tienes notas, agrega una</div>}
+      {search.length === 0 && notes.length > 0 && <NotFound />}
+      {notes.length === 0 && <NotNotes />}
       <MasonryGrid notes={search} toggleshowModalDelete={toggleshowModalDelete} />
     </div>
   );

@@ -1,0 +1,16 @@
+.not-Found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.not-found-img {
+  width: 30rem;
+}
+
+.not-fount-text {
+  font-size:40px;
+
+}

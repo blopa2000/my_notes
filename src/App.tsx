@@ -6,6 +6,7 @@ import Account from "./pages/Account";
 import Loading from "./components/Loading";
 import { useAuth } from "./context/auth/AuthContext";
 import NoteForm from "./pages/NoteForm";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const { loading } = useAuth();
@@ -45,7 +46,7 @@ function App() {
           />
         </Route>
         <Route path="account" element={<Account />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );
