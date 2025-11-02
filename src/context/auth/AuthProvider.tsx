@@ -35,8 +35,12 @@ export function AuthProvider({ children }: WithChildren) {
     dispatch({ type: "CLEAN_STATE" });
   };
 
+  const updateUser = (payload: { name: string }) => {
+    dispatch({ type: "UPDATE_USER", payload });
+  };
+
   return (
-    <AuthContext.Provider value={{ ...state, setLoading, cleadState }}>
+    <AuthContext.Provider value={{ ...state, setLoading, cleadState, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

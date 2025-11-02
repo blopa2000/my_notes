@@ -5,12 +5,14 @@ import "../styles/navbar.css";
 import { useAuth } from "../context/auth/AuthContext";
 import { Link } from "react-router";
 import { useNotes } from "../context/notes/NotesContext";
+import ModalProfile from "./ModalProfile";
 
 const Navbar = () => {
   const { setLoading, cleadState } = useAuth();
   const { setNotes } = useNotes();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -21,6 +23,11 @@ const Navbar = () => {
     } catch (error) {
       console.error("Error during logout:", error);
     }
+  };
+
+  const toggleModalProfile = () => {
+    setShowModal((pre) => !pre);
+    setOpen(false);
   };
 
   // Cerrar el menú si se hace clic fuera
@@ -35,29 +42,32 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar">
-      <Link to="/dashboard" className="navbar-title-link">
-        <h1 className="navbar-title">Notes</h1>
-      </Link>
+    <>
+      {showModal && <ModalProfile toggleModalProfile={toggleModalProfile} />}
+      <nav className="navbar">
+        <Link to="/dashboard" className="navbar-title-link">
+          <h1 className="navbar-title">Notes</h1>
+        </Link>
 
-      <div className="navbar-container" ref={menuRef}>
-        <button className="navbar-button" onClick={() => setOpen((prev: boolean) => !prev)}>
-          <Menu size={30} />
-        </button>
-
-        <div className={`navbar-dropdown ${open ? "show" : ""}`}>
-          <button className="navbar-item">
-            <User /> <h2>Profile</h2>
+        <div className="navbar-container" ref={menuRef}>
+          <button className="navbar-button" onClick={() => setOpen((prev: boolean) => !prev)}>
+            <Menu size={30} />
           </button>
-          {/* <button className="navbar-item">
+
+          <div className={`navbar-dropdown ${open ? "show" : ""}`}>
+            <button className="navbar-item" onClick={toggleModalProfile}>
+              <User /> <h2>Profile</h2>
+            </button>
+            {/* <button className="navbar-item">
             <Settings /> <h2>Settings</h2>
-          </button> */}
-          <button className="navbar-item logout" onClick={handleLogout}>
-            <LogOut /> <h2>Logout</h2>
-          </button>
+            </button> */}
+            <button className="navbar-item logout" onClick={handleLogout}>
+              <LogOut /> <h2>Logout</h2>
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

@@ -2,10 +2,10 @@ import { useNotes } from "@/context/notes/NotesContext";
 import "@/styles/modalDelete.css";
 import { noteService } from "@/services/noteService";
 import { useAuth } from "@/context/auth/AuthContext";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { TypeModalDeleteData } from "@/utils/types";
 import { INITIAL_MODAL } from "@/utils/constans";
-import { X } from "lucide-react";
+import Modal from "./Modal";
 
 type TypeModalDelete = {
   toggleshowModalDelete: (value: TypeModalDeleteData) => void;
@@ -16,7 +16,6 @@ function ModalDelete({ toggleshowModalDelete, noteId }: TypeModalDelete) {
   const { deleteNote } = useNotes();
   const { user } = useAuth();
   const [loading, setloading] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleDeleteNote = async () => {
     if (user?.uid) {
@@ -28,43 +27,21 @@ function ModalDelete({ toggleshowModalDelete, noteId }: TypeModalDelete) {
     }
   };
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-        toggleshowModalDelete(INITIAL_MODAL);
-      }
-    };
-
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [toggleshowModalDelete]);
-
   return (
-    <div className="modal-container">
-      <div className="modal-card" ref={modalRef}>
-        <div className="btn-content">
-          <button
-            className="btn-X"
-            disabled={loading}
-            onClick={() => toggleshowModalDelete(INITIAL_MODAL)}
-          >
-            <X />
-          </button>
-        </div>
-        <div className="modal-card-info">
-          <h1>Eliminar Nota</h1>
-          <p>deseas eliminar esta nota?</p>
-        </div>
-        <div className="modal-card-actions">
-          <button disabled={loading} onClick={handleDeleteNote}>
-            {loading ? "Cargando..." : "Eliminar Nota"}
-          </button>
-          <button disabled={loading} onClick={() => toggleshowModalDelete(INITIAL_MODAL)}>
-            Cancelar
-          </button>
-        </div>
+    <Modal toggleshowModalDelete={() => toggleshowModalDelete(INITIAL_MODAL)}>
+      <div className="modal-card-info">
+        <h1>Eliminar Nota</h1>
+        <p>deseas eliminar esta nota?</p>
       </div>
-    </div>
+      <div className="modal-card-actions">
+        <button disabled={loading} onClick={handleDeleteNote}>
+          {loading ? "Cargando..." : "Eliminar Nota"}
+        </button>
+        <button disabled={loading} onClick={() => toggleshowModalDelete(INITIAL_MODAL)}>
+          Cancelar
+        </button>
+      </div>
+    </Modal>
   );
 }
 

@@ -1,0 +1,25 @@
+.form-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-container-name input {
+  display: block;
+  border: none;
+  border-radius: 5px;
+  font-size: 30px;
+  background-color: rgb(120, 120, 120);
+  padding: 5px;
+}
+
+.form-container button {
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(99, 29, 107);
+  cursor: pointer;
+  margin: 5px auto;
+}

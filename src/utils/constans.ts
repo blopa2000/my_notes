@@ -5,6 +5,7 @@ export const INITIAL_STATE_AUTH: AuthContextType = {
   loading: true,
   setLoading: () => {},
   cleadState: () => {},
+  updateUser: () => {},
 };
 
 export const INITIAL_STATE_NOTES: NotesContextType = {

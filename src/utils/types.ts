@@ -19,6 +19,7 @@ export interface WithChildren {
 export type AuthContextType = StateUser & {
   setLoading: (value: boolean) => void;
   cleadState: () => void;
+  updateUser: (payload: { name: string }) => void;
 };
 
 // Tipos de acciones

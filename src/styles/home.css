@@ -1,3 +1,4 @@
+
 .actions-container {
   display: flex;
   justify-content: space-between;
@@ -47,7 +48,6 @@
   }
 
   .actions-container-add-note, .actions-container-search {
-    /* width: 100%; */
     flex: auto;
   }
 }
