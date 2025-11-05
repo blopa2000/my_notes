@@ -6,6 +6,16 @@ import { Save, ArrowLeft, Loader2 } from "lucide-react";
 import "@/styles/noteForm.css";
 import { useNotes } from "@/context/notes/NotesContext";
 import TiptapEditor from "@/components/TiptapEditor";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+
+// ✅ Esquema de validación Yup
+const NoteSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(3, "El título debe tener al menos 3 caracteres")
+    .required("El título es obligatorio"),
+});
 
 const NoteForm = () => {
   const location = useLocation();
@@ -13,76 +23,74 @@ const NoteForm = () => {
   const { user } = useAuth();
   const { getNoteById, updateNote, addNote } = useNotes();
   const { noteId } = location.state || {};
+  const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [note, setNote] = useState({
+  const [initialValues, setInitialValues] = useState({
     title: "",
-    content: "",
     bgColor: "#ffffff",
     creationDate: "",
   });
-
-  const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (noteId && user?.uid) {
       setLoading(true);
       const existingNote = getNoteById(noteId);
       if (existingNote) {
-        setNote({
+        setInitialValues({
           title: existingNote.title,
-          content: existingNote.content,
           bgColor: existingNote.bgColor,
           creationDate: existingNote.creationDate,
         });
+        setContent(existingNote.content);
       }
       setLoading(false);
     }
   }, [noteId, user, getNoteById]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!user?.uid) return null;
+  const handleContentChange = (html: string) => {
+    setContent(html);
+  };
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    if (!user?.uid) return;
     setLoading(true);
+
     try {
-      if (note.title.length > 0) {
-        if (noteId) {
-          const data = {
-            title: note.title,
-            bgColor: note.bgColor,
-            content: content.length > 0 ? content : note.content,
-          };
+      if (noteId) {
+        // Editar nota existente
+        const data = {
+          ...values,
+          content: content.length > 0 ? content : "",
+        };
 
-          const lastUpdate = await noteService.updateNote(user.uid, noteId, data);
+        const lastUpdate = await noteService.updateNote(user.uid, noteId, data);
 
-          updateNote({
-            ...data,
-            noteId,
-            lastUpdate,
-            creationDate: note.creationDate,
-          });
-        } else {
-          const resNote = await noteService.createNote(user.uid, {
-            ...note,
-            content,
-          });
+        updateNote({
+          ...data,
+          noteId,
+          lastUpdate,
+        });
 
-          addNote(resNote);
-        }
-        navigate("/dashboard");
+        toast.success("✅ Nota actualizada correctamente");
       } else {
-        console.log("titulo es requerido");
-        console.log(content);
+        // Crear nueva nota
+        const newNote = await noteService.createNote(user.uid, {
+          ...values,
+          content,
+        });
+
+        addNote(newNote);
+        toast.success("📝 Nota creada con éxito");
       }
+
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
+      toast.error("❌ Error al guardar la nota. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleContentChange = (html: string) => {
-    setContent(html);
   };
 
   return (
@@ -94,27 +102,41 @@ const NoteForm = () => {
           <ArrowLeft size={22} />
         </button>
 
-        <form className="edit-form" onSubmit={handleSubmit}>
-          <button disabled={loading} type="submit" className="save-btn">
-            {loading ? <Loader2 className="loading-icon" size={18} /> : <Save size={18} />}
-            <span>{noteId ? "Guardar cambios" : "Crear nota"}</span>
-          </button>
-          <input
-            className="edit-form-color"
-            type="color"
-            value={note.bgColor}
-            onChange={(e) => setNote({ ...note, bgColor: e.target.value })}
-          />
-          <input
-            className="edit-form-title"
-            type="text"
-            placeholder="Escribe un título..."
-            value={note.title}
-            onChange={(e) => setNote({ ...note, title: e.target.value })}
-          />
+        <Formik
+          initialValues={initialValues}
+          enableReinitialize
+          validationSchema={NoteSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched, values, setFieldValue }) => (
+            <Form className="edit-form">
+              <button disabled={loading} type="submit" className="save-btn">
+                {loading ? <Loader2 className="loading-icon" size={18} /> : <Save size={18} />}
+                <span>{noteId ? "Guardar cambios" : "Crear nota"}</span>
+              </button>
 
-          <TiptapEditor value={note.content} onChange={handleContentChange} />
-        </form>
+              <Field
+                name="bgColor"
+                type="color"
+                className="edit-form-color"
+                value={values.bgColor}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setFieldValue("bgColor", e.target.value)
+                }
+              />
+
+              {errors.title && touched.title && <p className="form-error-title">{errors.title}</p>}
+              <Field
+                name="title"
+                type="text"
+                placeholder="Escribe un título..."
+                className="edit-form-title"
+              />
+
+              <TiptapEditor value={content} onChange={handleContentChange} />
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

@@ -1,36 +1,81 @@
 import { useAuth } from "@/context/auth/AuthContext";
 import Modal from "./Modal";
 import "@/styles/modalProfile.css";
-import { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { userServices } from "@/services/userServices";
+import toast from "react-hot-toast";
 
-const ModalProfile = ({ toggleModalProfile }: { toggleModalProfile: () => void }) => {
+interface ModalProfileProps {
+  toggleModalProfile: () => void;
+}
+
+interface ProfileValues {
+  name: string;
+}
+
+const ModalProfile = ({ toggleModalProfile }: ModalProfileProps) => {
   const { user, updateUser } = useAuth();
-  const [name, setName] = useState(user?.name);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (user?.uid && name !== undefined && name.length > 5) {
-      userServices.updateUser({ name, uid: user.uid });
+  const initialValues: ProfileValues = {
+    name: user?.name || "",
+  };
 
-      updateUser({
-        name,
-      });
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(5, "El nombre debe tener al menos 5 caracteres")
+      .required("El nombre es obligatorio"),
+  });
+
+  const handleSubmit = async (values: ProfileValues) => {
+    if (!user?.uid) {
+      toast.error("No se encontró el usuario.");
+      return;
+    }
+
+    try {
+      await userServices.updateUser({ name: values.name, uid: user.uid });
+      updateUser({ name: values.name });
+      toast.success("Perfil actualizado correctamente 🎉");
       toggleModalProfile();
-    } else {
-      console.log("minimo 5 caracteres");
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al actualizar el perfil.");
     }
   };
 
   return (
     <Modal toggleshowModalDelete={toggleModalProfile}>
-      <form onSubmit={handleSubmit} className="form-container">
-        <div className="form-container-name">
-          <label htmlFor="name">Nombre de usuario:</label>
-          <input type="text" onChange={(e) => setName(e.target.value)} value={name} />
-        </div>
-        <button className="">Enviar</button>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleSubmit, isSubmitting }) => (
+          <Form onSubmit={handleSubmit} className="form-container">
+            <div className="form-container-name">
+              <label htmlFor="name">Nombre de usuario:</label>
+              <Field
+                id="name"
+                name="name"
+                type="text"
+                className="input-form"
+                placeholder="Escribe tu nombre"
+              />
+              <ErrorMessage name="name" component="div" className="error-message" />
+            </div>
+
+            <div className="form-buttons">
+              <button type="submit" className="btn-submit" disabled={isSubmitting}>
+                {isSubmitting ? "Guardando..." : "Guardar cambios"}
+              </button>
+              <button type="button" className="btn-cancel" onClick={toggleModalProfile}>
+                Cancelar
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </Modal>
   );
 };
