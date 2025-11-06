@@ -5,6 +5,9 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import LoginImg from "@/assets/login.png";
+import "@/styles/account.css";
+import { Key, Mail, User } from "lucide-react";
 
 interface FormValues {
   name: string;
@@ -15,6 +18,7 @@ interface FormValues {
 export const Account = () => {
   const { setLoading, user, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
+  const [changeMode, setChangeMode] = useState(true);
   const navigate = useNavigate();
 
   const initialValues: FormValues = {
@@ -32,7 +36,7 @@ export const Account = () => {
       name: isLogin
         ? Yup.string().notRequired()
         : Yup.string()
-            .min(5, "El nombre debe tener al menos 2 caracteres")
+            .min(5, "El nombre debe tener al menos 5 caracteres")
             .required("El nombre es obligatorio"),
     });
 
@@ -80,6 +84,23 @@ export const Account = () => {
     }
   };
 
+  const handleChangeIsLogin = () => {
+    console.log("sadsdasd");
+
+    if (window.innerWidth <= 1050) {
+      setLoading(true);
+      setIsLogin((pre) => !pre);
+      setTimeout(() => {
+        setLoading(false);
+      }, 400);
+    } else {
+      setChangeMode((pre) => !pre);
+      setTimeout(() => {
+        setIsLogin((pre) => !pre);
+      }, 400);
+    }
+  };
+
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
@@ -89,55 +110,69 @@ export const Account = () => {
   if (loading) return null;
 
   return (
-    <div className="account-page">
-      {isLogin ? "Inicia sesión en tu cuenta" : "Crea una cuenta nueva"}
-      <Formik
-        initialValues={initialValues}
-        validationSchema={getValidationSchema(isLogin)}
-        enableReinitialize
-        onSubmit={handleSubmit}
-      >
-        {({ handleSubmit }) => (
-          <Form onSubmit={handleSubmit}>
-            <div className="container-input">
-              <label htmlFor="email">Email:</label>
-              <Field
-                type="email"
-                id="email"
-                name="email"
-                className="input-form"
-                placeholder="ejemplo@correo.com"
-              />
-              <ErrorMessage name="email" component="div" className="error" />
-            </div>
-            {!isLogin && (
-              <div className="container-input">
-                <label htmlFor="name">Name:</label>
-                <Field
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="input-form"
-                  placeholder="Tu nombre"
-                />
-                <ErrorMessage name="name" component="div" className="error" />
+    <div className={`account-page ${changeMode ? "login-mode" : "signup-mode"}`}>
+      <div className="card-Account">
+        <h2>{isLogin ? "Inicia sesión en tu cuenta" : "Crea una cuenta nueva"}</h2>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={getValidationSchema(isLogin)}
+          enableReinitialize
+          onSubmit={handleSubmit}
+        >
+          {({ handleSubmit }) => (
+            <Form className="form-container-account" onSubmit={handleSubmit}>
+              <div className="form-container-input">
+                <label htmlFor="email">Email:</label>
+                <div className="input-container">
+                  <Field
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="input-form"
+                    placeholder="ejemplo@correo.com"
+                  />
+                  <Mail />
+                </div>
+                <ErrorMessage name="email" component="div" className="error" />
               </div>
-            )}
-            <div className="container-input">
-              <label htmlFor="password">Password:</label>
-              <Field type="password" id="password" name="password" className="input-form" />
-              <ErrorMessage name="password" component="div" className="error" />
-            </div>
-            <button type="submit" className="btn-submit">
-              Login
-            </button>
-          </Form>
-        )}
-      </Formik>
+              {!isLogin && (
+                <div className="container-input">
+                  <label htmlFor="name">Name:</label>
+                  <div className="input-container">
+                    <Field
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="input-form"
+                      placeholder="Tu nombre"
+                    />
+                    <User />
+                  </div>
+                  <ErrorMessage name="name" component="div" className="error" />
+                </div>
+              )}
+              <div className="container-input">
+                <label htmlFor="password">Password:</label>
+                <div className="input-container">
+                  <Field type="password" id="password" name="password" className="input-form" />
+                  <Key />
+                </div>
+                <ErrorMessage name="password" component="div" className="error" />
+              </div>
+              <button type="submit" className="btn-submit">
+                Login
+              </button>
+            </Form>
+          )}
+        </Formik>
 
-      <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
-      </button>
+        <button onClick={handleChangeIsLogin}>
+          {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
+        </button>
+      </div>
+      <div className="img-container">
+        <img src={LoginImg} alt="login-img" />
+      </div>
     </div>
   );
 };

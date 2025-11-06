@@ -1,0 +1,162 @@
+.account-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #d1a9f1, #b1a7f6);
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+.card-Account {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 40px 50px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  width: 380px;
+  transition: all 0.3s ease;
+  margin-left: 20px;
+  position: relative;
+}
+
+.card-Account:hover {
+  transform: translateY(-3px);
+}
+
+.card-Account h2 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: #4b2e83;
+  margin-bottom: 30px;
+}
+
+.form-container-account {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+label {
+  font-size: 17px;
+  margin-bottom: 5px;
+  color: #4a2e8384;
+  font-weight: 500;
+}
+
+.input-form {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #a87cf7;
+  background: transparent;
+  color: #2b173e;
+  font-size: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-form:focus {
+  border-color: #7b61ff;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container svg {
+  color: #7b61ff;
+}
+
+.btn-submit {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #7b61ff, #c98eff);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+.btn-submit:hover {
+  box-shadow: 0 0 20px #b48aff;
+  transform: translateY(-2px);
+}
+
+.card-Account>button {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  color: #4a3a60;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.card-Account>button:hover {
+  color: #7b61ff;
+}
+
+.error {
+  color: #d45aff;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.img-container {
+ position: relative;
+ left: -20px;
+ z-index: 10;
+}
+
+.img-container img {
+  width: 35em;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+
+.account-page .img-container,
+.account-page .card-Account {
+  transition: all 0.8s ease-in-out;
+}
+
+.account-page.signup-mode .img-container {
+  left: -480px
+}
+
+.account-page.signup-mode .card-Account {
+  transform: translateX(540px);
+}
+
+@media (max-width:1050px) {
+  .img-container {
+    display: none;
+  }
+
+  .card-Account {
+    width: 100%;
+    margin-left: 0px;
+    height: 94vh;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translateY(-3px);
+  }
+}

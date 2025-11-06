@@ -20,12 +20,9 @@ const PageNotFound = lazy(() =>
 function App() {
   const { loading } = useAuth();
 
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <div>
+      {loading && <Loading />}
       <Suspense fallback={<Loading />}>
         <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
         <Routes>
