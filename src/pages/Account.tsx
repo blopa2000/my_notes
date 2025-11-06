@@ -12,7 +12,7 @@ interface FormValues {
   password: string;
 }
 
-const Account = () => {
+export const Account = () => {
   const { setLoading, user, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
@@ -141,5 +141,3 @@ const Account = () => {
     </div>
   );
 };
-
-export default Account;

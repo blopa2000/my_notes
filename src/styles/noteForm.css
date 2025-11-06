@@ -140,3 +140,16 @@
     transform: rotate(360deg);
   }
 }  
+
+@media (max-width: 700px) {
+  .edit-container {
+    padding: 0px
+  }
+
+  .edit-box {
+    border-radius: 0%;
+  }
+  .edit-box body {
+    overflow: hidden;
+  }
+}

@@ -2,7 +2,7 @@ import pageNotFoundImage from "@/assets/undraw_page-not-found_6wni.svg";
 import "@/styles/pageNotFound.css";
 import { useNavigate } from "react-router";
 
-const PageNotFound = () => {
+export const PageNotFound = () => {
   const navigate = useNavigate();
   return (
     <div className="not-found-404">
@@ -13,5 +13,3 @@ const PageNotFound = () => {
     </div>
   );
 };
-
-export default PageNotFound;

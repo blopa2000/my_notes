@@ -197,3 +197,15 @@
   height: 0;
   pointer-events: none;
 }
+
+@media (max-width: 700px) {
+  .editor-content {
+    height: 67vh;
+  }
+  .editor-toolbar {
+    padding: 0px;
+  }
+  .editor-toolbar .left {
+    gap: 0px;
+  }
+}

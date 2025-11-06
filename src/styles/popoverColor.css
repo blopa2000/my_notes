@@ -5,9 +5,9 @@
   border-radius: 20px;
   z-index: 3;
   bottom: -35px;
-  right: 17px;
+  right: 10px;
   border: 1px solid #8c8c8c;
-  width: 80%;
+  width: 86%; 
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -34,8 +34,10 @@
 }
 
 .btn-not-color {
+  padding: 0px;
   background: no-repeat;
   color: black;
+  padding-top: 3px;
 }
 
 .btn-color:hover {

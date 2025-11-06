@@ -48,7 +48,6 @@ const Navbar = () => {
         <Link to="/dashboard" className="navbar-title-link">
           <h1 className="navbar-title">My Notes</h1>
         </Link>
-
         <div className="navbar-container" ref={menuRef}>
           <button className="navbar-button" onClick={() => setOpen((prev: boolean) => !prev)}>
             <Menu size={30} />

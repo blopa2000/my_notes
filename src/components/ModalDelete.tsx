@@ -33,6 +33,7 @@ function ModalDelete({ toggleshowModalDelete, noteId }: TypeModalDelete) {
         <h1 className="title ">Eliminar Nota</h1>
         <p className="txt">deseas eliminar esta nota?</p>
       </div>
+
       <div className="modal-actions">
         <button disabled={loading} className="btn" onClick={handleDeleteNote}>
           {loading ? "Cargando..." : "Eliminar Nota"}

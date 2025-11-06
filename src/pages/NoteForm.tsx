@@ -17,7 +17,7 @@ const NoteSchema = Yup.object().shape({
     .required("El título es obligatorio"),
 });
 
-const NoteForm = () => {
+export const NoteForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -95,7 +95,7 @@ const NoteForm = () => {
 
   return (
     <div className="edit-container">
-      <h1 className="edit-title">{noteId ? "Editar nota" : "Nueva nota"}</h1>
+      <h1 className="edit-title">{noteId ? "Editar Nota" : "Nueva Nota"}</h1>
 
       <div className="edit-box">
         <button className="back-btn" onClick={() => navigate(-1)}>
@@ -143,5 +143,3 @@ const NoteForm = () => {
     </div>
   );
 };
-
-export default NoteForm;

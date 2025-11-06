@@ -117,6 +117,10 @@ pre .hljs-quote {
   color: #616161;
 }
 
+mark {
+  color: black!important;
+}
+
 
 .title {
   color:#7b61ff;
@@ -170,4 +174,10 @@ pre .hljs-quote {
 
 .FRM-input:focus-visible {
   border-color: #7b61ff;
+}
+
+@media (max-width: 700px) {
+  .FRM-input {
+    width: 100%;
+  }
 }

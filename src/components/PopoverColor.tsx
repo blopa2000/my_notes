@@ -41,7 +41,7 @@ const PopoverColor = ({
   return (
     <div>
       <div className={`popover-container ${showColors ? "active" : ""}`} ref={popoverRef}>
-        <button onClick={() => handleChangeColor(undefined)} className="btn btn-not-color">
+        <button onClick={() => handleChangeColor(undefined)} className="btn-circle btn-not-color">
           <CircleOff />
         </button>
 
