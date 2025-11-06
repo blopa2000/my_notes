@@ -125,7 +125,9 @@ const NoteForm = () => {
                 }
               />
 
-              {errors.title && touched.title && <p className="form-error-title">{errors.title}</p>}
+              {errors.title && touched.title && (
+                <p className="error-message form-error-title">{errors.title}</p>
+              )}
               <Field
                 name="title"
                 type="text"

@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1E1A1A;
+  color: rgb(255, 255, 255);
+  background-color: #0d0f14;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,7 +20,7 @@ body {
 }
 
 
- blockquote {
+blockquote {
   position: relative;
   padding-left: 1em;
   padding-top: .375em;
@@ -28,7 +28,7 @@ body {
   margin: 1.5rem 0;
 }
 
- blockquote::before {
+blockquote::before {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -40,23 +40,23 @@ body {
   border-radius: 0;
 }
 
- ul[data-type="taskList"] li:not(:has(>p:first-child)) {
+ul[data-type="taskList"] li:not(:has(>p:first-child)) {
   list-style-type: none;
 }
 
- ul[data-type="taskList"] li {
+ul[data-type="taskList"] li {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
 
- ul[data-type="taskList"] li label {
+ul[data-type="taskList"] li label {
   position: relative;
   padding-top: .375rem;
   padding-right: .5rem;
 }
 
- input[type="checkbox"] {
+input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   background-color: #fff;
@@ -69,12 +69,12 @@ body {
   position: relative;
 }
 
- input[type="checkbox"]:checked {
-  background-color: #4f46e5;
-  border-color: #4f46e5;
+input[type="checkbox"]:checked {
+  background-color: #7b61ff;
+  border-color: #7b61ff;
 }
 
- input[type="checkbox"]:checked::after {
+input[type="checkbox"]:checked::after {
   content: "";
   position: absolute;
   top: 2px;
@@ -115,4 +115,59 @@ pre code {
 pre .hljs-comment,
 pre .hljs-quote {
   color: #616161;
+}
+
+
+.title {
+  color:#7b61ff;
+  margin: 20px;
+}
+
+.txt {
+  color: #403382;
+}
+
+.error-message {
+  color: rgb(233, 117, 117);
+  font-size: medium;
+}
+
+.btn {
+  background: #7b61ff;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover:nth-child(1) {
+  background-color: #4f3ea3;
+}
+
+.btn:nth-child(2) {
+  background-color: #5d5d5d;
+}
+.btn:hover:nth-child(2) {
+  background-color: #262626;
+
+}
+
+.FRM-label {
+  color: #3d307e5f;
+}
+
+.FRM-input {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 30px;
+  background-color: rgb(228, 228, 228);
+  padding: 5px;
+  color: #130944;
+  outline: none;
+}
+
+.FRM-input:focus-visible {
+  border-color: #7b61ff;
 }

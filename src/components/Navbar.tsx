@@ -46,7 +46,7 @@ const Navbar = () => {
       {showModal && <ModalProfile toggleModalProfile={toggleModalProfile} />}
       <nav className="navbar">
         <Link to="/dashboard" className="navbar-title-link">
-          <h1 className="navbar-title">Notes</h1>
+          <h1 className="navbar-title">My Notes</h1>
         </Link>
 
         <div className="navbar-container" ref={menuRef}>

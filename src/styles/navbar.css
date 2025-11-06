@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #2A2424;
+  background-color: #7b61ff;
   padding: 0px 20px;
   display: flex;
   align-items: center;
@@ -9,6 +9,12 @@
 .navbar-title-link {
   text-decoration: none;
   color: #F8F8F8;
+  margin: 0;
+}
+
+.navbar-title {
+  margin: 10px 0px;
+  font-family: "Workbench", sans-serif;
 }
 
 
@@ -18,7 +24,7 @@
 }
 
 .navbar-button {
-  background-color: #2A2424;
+  background-color: #7b61ff;
   color: #F8F8F8;
   border: none;
   padding: 10px;
@@ -67,7 +73,7 @@
   text-align: left;
   font-size: 15px;
   cursor: pointer;
-  color: #333;
+  color: #403382;
   transition: background 0.2s ease, padding-left 0.25s ease;
 }
 .navbar-item h2

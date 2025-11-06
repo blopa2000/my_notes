@@ -49,7 +49,7 @@ const PopoverColor = ({
           <button
             key={color}
             onClick={() => handleChangeColor(color)}
-            className={`btn btn-color ${colorNote === color ? "btn-color-selection" : ""}`}
+            className={`btn-circle btn-color ${colorNote === color ? "btn-color-selection" : ""}`}
             style={{ background: color }}
           />
         ))}

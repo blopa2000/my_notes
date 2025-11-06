@@ -30,14 +30,18 @@ function ModalDelete({ toggleshowModalDelete, noteId }: TypeModalDelete) {
   return (
     <Modal toggleshowModalDelete={() => toggleshowModalDelete(INITIAL_MODAL)}>
       <div className="modal-card-info">
-        <h1>Eliminar Nota</h1>
-        <p>deseas eliminar esta nota?</p>
+        <h1 className="title ">Eliminar Nota</h1>
+        <p className="txt">deseas eliminar esta nota?</p>
       </div>
-      <div className="modal-card-actions">
-        <button disabled={loading} onClick={handleDeleteNote}>
+      <div className="modal-actions">
+        <button disabled={loading} className="btn" onClick={handleDeleteNote}>
           {loading ? "Cargando..." : "Eliminar Nota"}
         </button>
-        <button disabled={loading} onClick={() => toggleshowModalDelete(INITIAL_MODAL)}>
+        <button
+          disabled={loading}
+          className="btn"
+          onClick={() => toggleshowModalDelete(INITIAL_MODAL)}
+        >
           Cancelar
         </button>
       </div>

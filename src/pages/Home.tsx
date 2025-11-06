@@ -44,12 +44,13 @@ export const Home = () => {
           <input
             onChange={handleSearch}
             name="search"
+            className="FRM-input"
             type="text"
             placeholder="Titulo de nota..."
           />
         </div>
         <div className="actions-container-add-note">
-          <Link to="/dashboard/add-Note">Add Note</Link>
+          <Link to="/dashboard/add-Note">Nueva Nota</Link>
         </div>
       </div>
       {search.length === 0 && notes.length > 0 && <NotFound />}

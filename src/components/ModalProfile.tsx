@@ -54,22 +54,24 @@ const ModalProfile = ({ toggleModalProfile }: ModalProfileProps) => {
         {({ handleSubmit, isSubmitting }) => (
           <Form onSubmit={handleSubmit} className="form-container">
             <div className="form-container-name">
-              <label htmlFor="name">Nombre de usuario:</label>
+              <label className="FRM-label" htmlFor="name">
+                Nombre de usuario:
+              </label>
               <Field
                 id="name"
                 name="name"
                 type="text"
-                className="input-form"
+                className="FRM-input"
                 placeholder="Escribe tu nombre"
               />
               <ErrorMessage name="name" component="div" className="error-message" />
             </div>
 
-            <div className="form-buttons">
-              <button type="submit" className="btn-submit" disabled={isSubmitting}>
+            <div className="modal-actions">
+              <button type="submit" className="btn" disabled={isSubmitting}>
                 {isSubmitting ? "Guardando..." : "Guardar cambios"}
               </button>
-              <button type="button" className="btn-cancel" onClick={toggleModalProfile}>
+              <button type="button" className="btn" onClick={toggleModalProfile}>
                 Cancelar
               </button>
             </div>

@@ -8,21 +8,20 @@
 }
 
 .actions-container-search input {
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #ffffff;
+  padding: 0.5rem 1rem;
   transition: all 0.3s ease;
   font-size: 30px;
   font-weight: bold;
-  color: #333;
-}
+  background-color: rgb(47 47 47 / 42%);
+  color: #fff;
+} 
+
 .actions-container-add-note a {
   background: #7b61ff;
   color: white;
-  border: none;
   border-radius: 10px;
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
   font-weight: 500;
   display: flex;
   align-items: center;
