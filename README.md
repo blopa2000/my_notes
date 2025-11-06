@@ -1,3 +1,35 @@
+# Firebase config
+Create a folder called ``firebase`` and try creating the file ``config.ts`` and copy the following
+
+```
+// src/firebase/config.js
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: "*********************************",
+  authDomain: "*********************************",
+  databaseURL: "*********************************",
+  projectId: "*********************************",
+  storageBucket: "*********************************",
+  messagingSenderId: "*********************************",
+  appId: "*********************************",
+  measurementId: "*********************************",
+};
+
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+
+// Exporta servicios para usar en otras partes
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+
+```
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
