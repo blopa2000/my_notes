@@ -42,16 +42,11 @@ export const Account = () => {
 
   const handleSubmit = async (values: FormValues) => {
     try {
+      setLoading(true);
       if (isLogin) {
-        const res = await authService.signInRequest(values.email, values.password);
-        setLoading(true);
-        if (res.user) {
-          navigate("/dashboard");
-        }
+        await authService.signInRequest(values.email, values.password);
       } else {
         await authService.signupRequest(values.email, values.password, values.name);
-        setLoading(true);
-        navigate("/dashboard");
       }
     } catch (error) {
       if (error instanceof Error && "code" in error) {
@@ -79,14 +74,11 @@ export const Account = () => {
       } else {
         toast.error("Ocurrió un error inesperado");
       }
-    } finally {
-      setLoading(false);
     }
   };
 
+  // controller when the screen is small
   const handleChangeIsLogin = () => {
-    console.log("sadsdasd");
-
     if (window.innerWidth <= 1050) {
       setLoading(true);
       setIsLogin((pre) => !pre);

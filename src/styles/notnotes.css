@@ -6,3 +6,13 @@
   margin: 20px;
   font-size: 30px;
 }
+
+.not-notes-text {
+  text-align: center;
+}
+
+@media (max-width:500px) {
+  .not-notes-img {
+    width: 100%;
+  }
+}

@@ -39,7 +39,7 @@ const PopoverColor = ({
   }, [closeColor, ButtonColorRef]);
 
   return (
-    <div>
+    <>
       <div className={`popover-container ${showColors ? "active" : ""}`} ref={popoverRef}>
         <button onClick={() => handleChangeColor(undefined)} className="btn-circle btn-not-color">
           <CircleOff />
@@ -60,7 +60,7 @@ const PopoverColor = ({
       >
         <LoaderCircle className="loading-color" />
       </div>
-    </div>
+    </>
   );
 };
 

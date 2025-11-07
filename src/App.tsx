@@ -23,7 +23,7 @@ function App() {
   return (
     <div>
       {loading && <Loading />}
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={!loading ? <Loading /> : null}>
         <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
         <Routes>
           <Route path="/" element={<>landing page</>} />

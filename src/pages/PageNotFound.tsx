@@ -1,4 +1,4 @@
-import pageNotFoundImage from "@/assets/undraw_page-not-found_6wni.svg";
+import pageNotFoundImage from "@/assets/pagenotFountImg.png";
 import "@/styles/pageNotFound.css";
 import { useNavigate } from "react-router";
 
