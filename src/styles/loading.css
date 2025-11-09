@@ -9,7 +9,7 @@
   font-family: "Inter", sans-serif;
   gap: 15px;
   z-index: 2;
-  position: absolute;
+  position: fixed;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
 }

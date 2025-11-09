@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./context/auth/AuthContext";
 import { Toaster } from "react-hot-toast";
 import { lazy, Suspense } from "react";
+import { Landing } from "./pages/Landing";
 
 const Home = lazy(() => import("./pages/Home").then((module) => ({ default: module.Home })));
 const Account = lazy(() =>
@@ -26,7 +27,7 @@ function App() {
       <Suspense fallback={!loading ? <Loading /> : null}>
         <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
         <Routes>
-          <Route path="/" element={<>landing page</>} />
+          <Route path="/" element={<Landing />} />
           <Route path="dashboard" element={<Layount />}>
             <Route
               index
