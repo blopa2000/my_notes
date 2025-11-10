@@ -118,7 +118,6 @@ label {
 .img-container {
  position: relative;
  left: -20px;
- z-index: 10;
 }
 
 .img-container img {

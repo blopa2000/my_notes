@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import LoginImg from "@/assets/login.png";
 import "@/styles/account.css";
 import { Key, Mail, User } from "lucide-react";
+import ModalRecoverPassword from "@/components/ModalRecoverPassword";
 
 interface FormValues {
   name: string;
@@ -19,6 +20,7 @@ export const Account = () => {
   const { setLoading, user, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [changeMode, setChangeMode] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const initialValues: FormValues = {
@@ -93,6 +95,10 @@ export const Account = () => {
     }
   };
 
+  const toggleshowModalDelete = () => {
+    setShowModal(!showModal);
+  };
+
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
@@ -102,69 +108,74 @@ export const Account = () => {
   if (loading) return null;
 
   return (
-    <div className={`account-page ${changeMode ? "login-mode" : "signup-mode"}`}>
-      <div className="card-Account">
-        <h2>{isLogin ? "Inicia sesión en tu cuenta" : "Crea una cuenta nueva"}</h2>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={getValidationSchema(isLogin)}
-          enableReinitialize
-          onSubmit={handleSubmit}
-        >
-          {({ handleSubmit }) => (
-            <Form className="form-container-account" onSubmit={handleSubmit}>
-              <div className="form-container-input">
-                <label htmlFor="email">Email:</label>
-                <div className="input-container">
-                  <Field
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="input-form"
-                    placeholder="ejemplo@correo.com"
-                  />
-                  <Mail />
-                </div>
-                <ErrorMessage name="email" component="div" className="error" />
-              </div>
-              {!isLogin && (
-                <div className="container-input">
-                  <label htmlFor="name">Name:</label>
+    <>
+      {showModal && <ModalRecoverPassword toggleshowModalDelete={toggleshowModalDelete} />}
+
+      <div className={`account-page ${changeMode ? "login-mode" : "signup-mode"}`}>
+        <div className="card-Account">
+          <h2>{isLogin ? "Inicia sesión en tu cuenta" : "Crea una cuenta nueva"}</h2>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(isLogin)}
+            enableReinitialize
+            onSubmit={handleSubmit}
+          >
+            {({ handleSubmit }) => (
+              <Form className="form-container-account" onSubmit={handleSubmit}>
+                <div className="form-container-input">
+                  <label htmlFor="email">Email:</label>
                   <div className="input-container">
                     <Field
-                      type="text"
-                      id="name"
-                      name="name"
+                      type="email"
+                      id="email"
+                      name="email"
                       className="input-form"
-                      placeholder="Tu nombre"
+                      placeholder="ejemplo@correo.com"
                     />
-                    <User />
+                    <Mail />
                   </div>
-                  <ErrorMessage name="name" component="div" className="error" />
+                  <ErrorMessage name="email" component="div" className="error" />
                 </div>
-              )}
-              <div className="container-input">
-                <label htmlFor="password">Password:</label>
-                <div className="input-container">
-                  <Field type="password" id="password" name="password" className="input-form" />
-                  <Key />
+                {!isLogin && (
+                  <div className="container-input">
+                    <label htmlFor="name">Name:</label>
+                    <div className="input-container">
+                      <Field
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="input-form"
+                        placeholder="Tu nombre"
+                      />
+                      <User />
+                    </div>
+                    <ErrorMessage name="name" component="div" className="error" />
+                  </div>
+                )}
+                <div className="container-input">
+                  <label htmlFor="password">Password:</label>
+                  <div className="input-container">
+                    <Field type="password" id="password" name="password" className="input-form" />
+                    <Key />
+                  </div>
+                  <ErrorMessage name="password" component="div" className="error" />
                 </div>
-                <ErrorMessage name="password" component="div" className="error" />
-              </div>
-              <button type="submit" className="btn-submit">
-                Login
-              </button>
-            </Form>
-          )}
-        </Formik>
+                <button type="submit" className="btn-submit">
+                  Login
+                </button>
+              </Form>
+            )}
+          </Formik>
 
-        <button onClick={handleChangeIsLogin}>
-          {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
-        </button>
+          <button onClick={handleChangeIsLogin}>
+            {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
+          </button>
+          {isLogin && <button onClick={toggleshowModalDelete}>Recuperar Contraseña</button>}
+        </div>
+        <div className="img-container">
+          <img src={LoginImg} alt="login-img" />
+        </div>
       </div>
-      <div className="img-container">
-        <img src={LoginImg} alt="login-img" />
-      </div>
-    </div>
+    </>
   );
 };
