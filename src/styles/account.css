@@ -63,7 +63,7 @@ label {
 }
 
 .input-form:focus {
-  border-color: #7b61ff;
+  border-color: var(--color-primary);
 }
 
 .input-container {
@@ -73,7 +73,7 @@ label {
 }
 
 .input-container svg {
-  color: #7b61ff;
+  color: var(--color-primary);
 }
 
 .btn-submit {
@@ -82,7 +82,7 @@ label {
   padding: 12px;
   border: none;
   border-radius: 25px;
-  background: linear-gradient(135deg, #7b61ff, #c98eff);
+  background: linear-gradient(135deg, var(--color-primary), #c98eff);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -106,7 +106,7 @@ label {
 }
 
 .card-Account>button:hover {
-  color: #7b61ff;
+  color: var(--color-primary);
 }
 
 .error {

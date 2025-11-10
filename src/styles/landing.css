@@ -32,7 +32,7 @@
 
 .btn-primary {
   background: white;
-  color: #7b61ff;
+  color: var(--color-primary);
   border: none;
   padding: 12px 28px;
   font-size: 1.1rem;
@@ -54,7 +54,7 @@
 
 .about h2 {
   font-size: 2rem;
-  color: #7b61ff;
+  color: var(--color-primary);
   margin-bottom: 15px;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .cta {
-  background: linear-gradient(135deg, #7b61ff, #9370ff);
+  background: linear-gradient(135deg, var(--color-primary), #9370ff);
   color: white;
   text-align: center;
   padding: 80px 20px;
@@ -126,7 +126,7 @@
 
 .btn-secondary {
   background: white;
-  color: #7b61ff;
+  color: var(--color-primary);
   border: none;
   padding: 14px 32px;
   border-radius: 8px;

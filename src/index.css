@@ -6,6 +6,7 @@
   color-scheme: light dark;
   --background-color: #121212;
   --text-color: #ffffff;
+  --color-primary:#7b61ff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -79,8 +80,8 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: #7b61ff;
-  border-color: #7b61ff;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 input[type="checkbox"]:checked::after {
@@ -132,7 +133,7 @@ mark {
 
 
 .title {
-  color:#7b61ff;
+  color:var(--color-primary);
   margin: 20px;
 }
 
@@ -146,7 +147,7 @@ mark {
 }
 
 .btn {
-  background: #7b61ff;
+  background: var(--color-primary);
   padding: 10px;
   font-size: 20px;
   border-radius: 5px;
@@ -182,7 +183,7 @@ mark {
 }
 
 .FRM-input:focus-visible {
-  border-color: #7b61ff;
+  border-color: var(--color-primary);
 }
 
 @media (max-width: 700px) {

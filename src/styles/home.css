@@ -21,7 +21,7 @@
 }
 
 .actions-container-add-note a {
-  background: #7b61ff;
+  background: var(--color-primary);
   color: white;
   border-radius: 10px;
   padding: 0.5rem 1rem;

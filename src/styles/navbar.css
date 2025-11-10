@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #7b61ff;
+  background-color: var(--color-primary);
   padding: 0px 20px;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@
 }
 
 .navbar-button {
-  background-color: #7b61ff;
+  background-color: var(--color-primary);
   color: #F8F8F8;
   border: none;
   padding: 10px;
