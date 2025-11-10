@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Menu, User, LogOut } from "lucide-react";
+import { Menu, User, LogOut, Sun, Moon } from "lucide-react";
 import { authService } from "../services/authService";
 import "../styles/navbar.css";
 import { useAuth } from "../context/auth/AuthContext";
@@ -13,6 +13,15 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [showModal, setShowModal] = useState(false);
+
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    // cargar tema guardado o por defecto oscuro
+    return (localStorage.getItem("theme") as "dark" | "light") || "dark";
+  });
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
   const handleLogout = async () => {
     try {
@@ -29,6 +38,13 @@ const Navbar = () => {
     setShowModal((pre) => !pre);
     setOpen(false);
   };
+
+  //Aplicar tema al cargar o al cambiar
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   // Cerrar el menú si se hace clic fuera
   useEffect(() => {
@@ -55,13 +71,14 @@ const Navbar = () => {
 
           <div className={`navbar-dropdown ${open ? "show" : ""}`}>
             <button className="navbar-item" onClick={toggleModalProfile}>
-              <User /> <h2>Profile</h2>
+              <User /> <h2>Perfil</h2>
             </button>
-            {/* <button className="navbar-item">
-            <Settings /> <h2>Settings</h2>
-            </button> */}
+            <button className="navbar-item" onClick={toggleTheme}>
+              {theme === "dark" ? <Sun /> : <Moon />}{" "}
+              <h2>{theme === "dark" ? "Modo claro" : "Modo oscuro"}</h2>
+            </button>
             <button className="navbar-item logout" onClick={handleLogout}>
-              <LogOut /> <h2>Logout</h2>
+              <LogOut /> <h2>Cerrar sesión</h2>
             </button>
           </div>
         </div>

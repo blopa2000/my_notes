@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgb(255, 255, 255);
-  background-color: #0d0f14;
+  --background-color: #121212;
+  --text-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,12 +13,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* cuando el tema sea claro */
+[data-theme="light"] {
+  --background-color: #f9f9f9;
+  --text-color: #1a1a1a;
+}
+
+/* aplica los colores a toda la app */
 body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
 }
-
 
 blockquote {
   position: relative;

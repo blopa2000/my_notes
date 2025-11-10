@@ -6,6 +6,7 @@ import { useNotes } from "@/context/notes/NotesContext";
 import "@/styles/home.css";
 import { INITIAL_MODAL } from "@/utils/constans";
 import type { TypeModalDeleteData } from "@/utils/types";
+import { CopyPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
@@ -50,7 +51,10 @@ export const Home = () => {
           />
         </div>
         <div className="actions-container-add-note">
-          <Link to="/dashboard/add-Note">Nueva Nota</Link>
+          <Link to="/dashboard/add-Note">
+            <CopyPlus />
+            Nueva Nota
+          </Link>
         </div>
       </div>
       {search.length === 0 && notes.length > 0 && <NotFound />}
