@@ -10,7 +10,6 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 
-// ✅ Esquema de validación Yup
 const NoteSchema = Yup.object().shape({
   title: Yup.string()
     .min(3, "El título debe tener al menos 3 caracteres")
@@ -24,7 +23,7 @@ export const NoteForm = () => {
   const { getNoteById, updateNote, addNote } = useNotes();
   const { noteId } = location.state || {};
   const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const [initialValues, setInitialValues] = useState({
     title: "",
@@ -34,7 +33,6 @@ export const NoteForm = () => {
 
   useEffect(() => {
     if (noteId && user?.uid) {
-      setLoading(true);
       const existingNote = getNoteById(noteId);
       if (existingNote) {
         setInitialValues({
@@ -44,7 +42,6 @@ export const NoteForm = () => {
         });
         setContent(existingNote.content);
       }
-      setLoading(false);
     }
   }, [noteId, user, getNoteById]);
 
@@ -54,7 +51,7 @@ export const NoteForm = () => {
 
   const handleSubmit = async (values: typeof initialValues) => {
     if (!user?.uid) return;
-    setLoading(true);
+    setLoadingBtn(true);
 
     try {
       if (noteId) {
@@ -89,7 +86,7 @@ export const NoteForm = () => {
       console.error(error);
       toast.error("❌ Error al guardar la nota. Inténtalo de nuevo.");
     } finally {
-      setLoading(false);
+      setLoadingBtn(false);
     }
   };
 
@@ -98,7 +95,7 @@ export const NoteForm = () => {
       <h1 className="edit-title">{noteId ? "Editar Nota" : "Nueva Nota"}</h1>
 
       <div className="edit-box">
-        <button className="back-btn" onClick={() => navigate(-1)}>
+        <button className="back-btn" onClick={() => navigate("/dashboard")}>
           <ArrowLeft size={22} />
         </button>
 
@@ -110,8 +107,8 @@ export const NoteForm = () => {
         >
           {({ errors, touched, values, setFieldValue }) => (
             <Form className="edit-form">
-              <button disabled={loading} type="submit" className="save-btn">
-                {loading ? <Loader2 className="loading-icon" size={18} /> : <Save size={18} />}
+              <button disabled={loadingBtn} type="submit" className="save-btn">
+                {loadingBtn ? <Loader2 className="loading-icon" size={18} /> : <Save size={18} />}
                 <span>{noteId ? "Guardar cambios" : "Crear nota"}</span>
               </button>
 

@@ -61,9 +61,12 @@ ul[data-type="taskList"] li {
 }
 
 ul[data-type="taskList"] li label {
-  position: relative;
-  padding-top: .375rem;
-  padding-right: .5rem;
+  padding-top: 3px;
+  padding-right: 3px;
+}
+
+ul[data-type="taskList"] li div p{
+  margin-top: 7px;
 }
 
 input[type="checkbox"] {

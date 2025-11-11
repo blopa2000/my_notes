@@ -125,13 +125,25 @@ const TiptapEditor = ({ value, onChange }: TiptapEditorProps) => {
     },
   });
 
-  // 👇 Cargamos el contenido inicial, ya decodificado
+  const [hasSetInitialContent, setHasSetInitialContent] = useState(false);
+
   useEffect(() => {
-    if (editor) {
-      const decoded = decodeHTMLEntities(value || "");
-      editor.commands.setContent(decoded);
+    if (!editor) return;
+
+    // 1️⃣ Si el editor se monta y aún no tiene contenido inicial, lo establecemos
+    if (!hasSetInitialContent && value) {
+      editor.commands.setContent(decodeHTMLEntities(value));
+      setHasSetInitialContent(true);
     }
-  }, [editor, value]);
+
+    // 2️⃣ Si después llega un nuevo "value" (por ejemplo al cargar una nota existente)
+    // y todavía no hemos seteado el contenido, lo establecemos una vez
+    // eslint-disable-next-line no-dupe-else-if
+    else if (value && !hasSetInitialContent) {
+      editor.commands.setContent(decodeHTMLEntities(value));
+      setHasSetInitialContent(true);
+    }
+  }, [editor, value, hasSetInitialContent]);
 
   const commands = {
     toggleBold: () => editor.chain().focus().toggleBold().run(),
@@ -157,8 +169,6 @@ const TiptapEditor = ({ value, onChange }: TiptapEditorProps) => {
       const lastUrl = editor.getAttributes("link").href;
       const url = window.prompt("url", lastUrl);
       if (url) {
-        console.log(url);
-
         editor.chain().focus().setLink({ href: url }).run();
       }
     },
