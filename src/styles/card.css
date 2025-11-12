@@ -41,9 +41,7 @@
 }
 
 .card-info-Container span {
-  display: block;
   font-size: 14px;
-  opacity: 0.3;
   margin-bottom: 0.3rem;
   text-align:end;
   font-weight: 600;
@@ -94,4 +92,56 @@
 .card-action-Container button:hover {
   transform: scale(1.05);
   opacity: 1;
+}
+
+
+.card-info-content p {
+  margin: 5px 0px;
+}
+
+
+.card-info-content ol {
+  padding-left: 1.5em;
+}
+
+.card-info-content li[data-list] {
+  list-style: none;
+  margin-left: 1.5em;
+  position: relative;
+}
+
+
+/* Checkbox sin marcar */
+.card-info-content li[data-list="unchecked"]>.ql-ui::before {
+  content: "⬜";
+  /* Cambia el símbolo */
+  color: #999;
+  font-size: 18px;
+  display: inline-block;
+  width: 1.2em;
+  text-align: center;
+}
+
+.card-info-content li[data-list="checked"]>.ql-ui::before {
+  content: "✅";
+  color: #7b61ff;
+  font-size: 18px;
+  display: inline-block;
+  width: 1.2em;
+  text-align: center;
+}
+
+.card-info-content li[data-list] {
+  list-style: none;
+  margin-left: 1.5em;
+  position: relative;
+}
+
+.ql-ui:before {
+  display: inline-block;
+  margin-left: -1.5em;
+  margin-right: .3em;
+  text-align: right;
+  white-space: nowrap;
+  width: 1.2em;
 }

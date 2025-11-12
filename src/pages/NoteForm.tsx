@@ -5,10 +5,10 @@ import { noteService } from "@/services/noteService";
 import { Save, ArrowLeft, Loader2 } from "lucide-react";
 import "@/styles/noteForm.css";
 import { useNotes } from "@/context/notes/NotesContext";
-import TiptapEditor from "@/components/TiptapEditor";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import { QuillEditor } from "@/components/QuillEditor";
 
 const NoteSchema = Yup.object().shape({
   title: Yup.string()
@@ -44,10 +44,6 @@ export const NoteForm = () => {
       }
     }
   }, [noteId, user, getNoteById]);
-
-  const handleContentChange = (html: string) => {
-    setContent(html);
-  };
 
   const handleSubmit = async (values: typeof initialValues) => {
     if (!user?.uid) return;
@@ -132,7 +128,7 @@ export const NoteForm = () => {
                 className="edit-form-title"
               />
 
-              <TiptapEditor value={content} onChange={handleContentChange} />
+              <QuillEditor value={content} onChange={setContent} />
             </Form>
           )}
         </Formik>
