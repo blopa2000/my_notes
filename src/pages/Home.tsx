@@ -5,7 +5,7 @@ import NotNotes from "@/components/NotNotes";
 import { useNotes } from "@/context/notes/NotesContext";
 import "@/styles/home.css";
 import { INITIAL_MODAL } from "@/utils/constans";
-import type { TypeModalDeleteData } from "@/utils/types";
+import type { Note, TypeModalDeleteData } from "@/utils/types";
 import { CopyPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
@@ -16,11 +16,10 @@ export const Home = () => {
   const [modalData, setModalData] = useState(INITIAL_MODAL);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(
-      notes.filter((note) => {
-        return note.title.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-    );
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchTerm));
+    const sortedNotes = handleSortedNotesPinned(filteredNotes);
+    setSearch(sortedNotes);
   };
 
   const toggleshowModalDelete = (value: TypeModalDeleteData) => {
@@ -30,8 +29,19 @@ export const Home = () => {
     });
   };
 
+  const handleSortedNotesPinned = (notesList: Note[]) => {
+    const sortedNotes = [...notesList].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return (Number(b.lastUpdate) || 0) - (Number(a.lastUpdate) || 0);
+    });
+
+    return sortedNotes;
+  };
+
   useEffect(() => {
-    setSearch(notes);
+    const sortedNotes = handleSortedNotesPinned(notes);
+    setSearch(sortedNotes);
   }, [notes]);
 
   return (

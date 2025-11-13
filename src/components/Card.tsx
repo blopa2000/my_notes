@@ -1,4 +1,4 @@
-import { Palette, Trash } from "lucide-react";
+import { Palette, Trash, Pin, PinOff } from "lucide-react";
 import "../styles/card.css";
 import type { TypeModalDeleteData, Note } from "../utils/types";
 import { useNavigate } from "react-router";
@@ -24,17 +24,27 @@ type TypeCard = {
 };
 
 const Card = ({ toggleshowModalDelete, note }: TypeCard) => {
-  const { title, content, lastUpdate, bgColor, noteId } = note;
+  const { title, content, lastUpdate, bgColor, noteId, pinned } = note;
   const navigate = useNavigate();
   const textColor = getTextColor(bgColor);
   const [showColors, setShowColors] = useState(false);
   const { user } = useAuth();
-  const { updateColorNote } = useNotes();
+  const { updateColorNote, updatePinnedNote } = useNotes();
   const [loading, setloading] = useState(false);
   const ButtonColorRef = useRef<HTMLButtonElement>(null);
 
   const handleCardClick = (id: string) => {
     navigate(`/dashboard/edit`, { state: { noteId: id } });
+  };
+
+  const handlePinNote = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user?.uid) return;
+    // console.log(note.noteId);
+
+    const newPinnedState = !note.pinned;
+    await noteService.changePinned(user.uid, note.noteId, newPinnedState);
+    updatePinnedNote(note.noteId, newPinnedState);
   };
 
   const handleColor = (e: React.FormEvent) => {
@@ -63,10 +73,18 @@ const Card = ({ toggleshowModalDelete, note }: TypeCard) => {
       <div
         onClick={() => handleCardClick(noteId)}
         style={{ background: bgColor, color: textColor, zIndex: 2 }}
-        className="card"
+        className={`card ${pinned ? "card-pinned" : ""}`}
       >
         <div className="card-info-Container">
-          <span className="card-date">{lastUpdate}</span>
+          <div className="card-info-header">
+            <button
+              className={`card-btn  ${pinned ? "pinned" : "over-pinned"}`}
+              onClick={handlePinNote}
+            >
+              {pinned ? <PinOff /> : <Pin />}
+            </button>
+            <span className="card-date">{lastUpdate}</span>
+          </div>
           <h2>{title}</h2>
           <div className="card-info-content" dangerouslySetInnerHTML={{ __html: content }} />
         </div>

@@ -39,6 +39,7 @@ export const noteService = {
           lastUpdate,
           creationDate,
           bgColor: doc.data()?.bgColor || "#ffffff",
+          pinned: doc.data().pinned,
         };
       });
 
@@ -142,6 +143,10 @@ export const noteService = {
       console.error("Error deleting note:", error);
       throw error;
     }
+  },
+  changePinned: async (userId: string, noteId: string, pinned: boolean) => {
+    const noteRef = doc(db, "users", userId, "notes", noteId);
+    await updateDoc(noteRef, { pinned });
   },
   transformTimestamp: (timestamp: Timestamp): string => {
     const date = timestamp.toDate().toString().split(" ");

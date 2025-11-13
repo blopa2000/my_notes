@@ -39,6 +39,10 @@ export const NotesProvider = ({ children }: WithChildren) => {
     dispatch({ type: "UPDATE_COLOR_NOTE", payload: { noteId, bgColor } });
   };
 
+  const updatePinnedNote = (noteId: string, pinned: boolean) => {
+    dispatch({ type: "UPDATE_PINNED_NOTE", payload: { noteId, pinned } });
+  };
+
   return (
     <NotesContext.Provider
       value={{
@@ -49,6 +53,7 @@ export const NotesProvider = ({ children }: WithChildren) => {
         setNotes,
         getNoteById,
         updateColorNote,
+        updatePinnedNote,
       }}
     >
       {children}

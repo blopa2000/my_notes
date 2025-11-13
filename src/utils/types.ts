@@ -28,7 +28,8 @@ export type Action =
   | { type: "UPDATE_USER"; payload: Partial<User> }
   | { type: "REMOVE_USER" }
   | { type: "SET_LOADING"; payload: boolean }
-  | { type: "CLEAN_STATE" };
+  | { type: "CLEAN_STATE" }
+  | { type: "UPDATE_PINNED_NOTE" };
 
 export type Note = {
   noteId: string;
@@ -37,6 +38,7 @@ export type Note = {
   lastUpdate: string;
   creationDate: string;
   bgColor: string;
+  pinned?: boolean;
 };
 
 export type TypeModalDeleteData = {
@@ -55,6 +57,7 @@ export type NotesContextType = StateNotes & {
   setNotes: () => void;
   getNoteById: (id: string) => Note | undefined;
   updateColorNote: (noteId: string, bgColor: string) => void;
+  updatePinnedNote:(noteId: string, pinned: boolean) => void;
 };
 
 export type TiptapEditorProps = {

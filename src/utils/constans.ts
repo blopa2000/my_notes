@@ -16,6 +16,7 @@ export const INITIAL_STATE_NOTES: NotesContextType = {
   setNotes: () => {},
   getNoteById: () => undefined,
   updateColorNote: () => {},
+  updatePinnedNote: () => {},
 };
 
 export const INITIAL_MODAL: TypeModalDeleteData = {

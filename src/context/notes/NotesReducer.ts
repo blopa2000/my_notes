@@ -6,7 +6,8 @@ export type NotesAction =
   | { type: "ADD_NOTE"; payload: Note }
   | { type: "UPDATE_NOTE"; payload: Note }
   | { type: "DELETE_NOTE"; payload: string }
-  | { type: "UPDATE_COLOR_NOTE"; payload: { noteId: string; bgColor: string } };
+  | { type: "UPDATE_COLOR_NOTE"; payload: { noteId: string; bgColor: string } }
+  | { type: "UPDATE_PINNED_NOTE"; payload: { noteId: string; pinned: boolean } };
 
 export const NotesReducer = (
   state: StateNotes = INITIAL_STATE_NOTES,
@@ -44,6 +45,20 @@ export const NotesReducer = (
             return {
               ...n,
               bgColor: action.payload.bgColor,
+            };
+          }
+          return n;
+        }),
+      };
+    }
+    case "UPDATE_PINNED_NOTE": {
+      return {
+        ...state,
+        notes: state.notes.map((n: Note) => {
+          if (n.noteId === action.payload.noteId) {
+            return {
+              ...n,
+              pinned: action.payload.pinned,
             };
           }
           return n;

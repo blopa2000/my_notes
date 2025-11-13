@@ -29,6 +29,37 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+.card-info-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 0.3rem;
+  text-align: end;
+  font-weight: 600;
+}
+
+.card-info-header .card-date {
+  opacity: 0.5;
+}
+
+.over-pinned {
+  opacity: 0 !important;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.card:hover .over-pinned {
+  opacity: 0.7 !important;
+}
+
+.over-pinned:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.card-pinned {
+  border: 1.5px solid gold;
+}
+
 
 .card-info-Container h2 {
   margin-bottom: 0.4rem;
@@ -40,7 +71,7 @@
   white-space: nowrap;
 }
 
-.card-info-Container span {
+.card-info-Container .card-info-content span {
   font-size: 14px;
   margin-bottom: 0.3rem;
   text-align:end;
@@ -57,6 +88,8 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 16;
+  line-clamp: 16;
   white-space: normal;
   line-height: 1.45;
   max-height: 23rem;
@@ -79,7 +112,7 @@
   opacity: 1;
 }
 
-.card-action-Container button {
+.card-container button {
   background: none;
   border: none;
   padding: 6px;
@@ -144,4 +177,12 @@
   text-align: right;
   white-space: nowrap;
   width: 1.2em;
+}
+
+.card-info-content blockquote {
+  border-left: 4px solid #ccc;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 0px;
+  padding-left: 16px;
 }
