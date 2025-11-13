@@ -29,6 +29,7 @@ export const NoteForm = () => {
     title: "",
     bgColor: "#ffffff",
     creationDate: "",
+    pinned: false,
   });
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export const NoteForm = () => {
           title: existingNote.title,
           bgColor: existingNote.bgColor,
           creationDate: existingNote.creationDate,
+          pinned: existingNote?.pinned ? true : false,
         });
         setContent(existingNote.content);
       }
