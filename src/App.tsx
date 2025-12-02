@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import Loading from "./components/Loading";
-import { Layount } from "./components/Layount";
+import { Layout } from "./components/Layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./context/auth/AuthContext";
 import { Toaster } from "react-hot-toast";
@@ -28,7 +28,7 @@ function App() {
         <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="dashboard" element={<Layount />}>
+          <Route path="dashboard" element={<Layout />}>
             <Route
               index
               element={

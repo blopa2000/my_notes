@@ -1,12 +1,12 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useMemo, useCallback } from "react";
 import { AuthContext } from "./AuthContext";
-import { AuthReduceer } from "./AuthReduceer";
+import { AuthReducer } from "./AuthReducer";
 import { authService } from "@/services/authService";
-import { INITIAL_STATE_AUTH } from "@/utils/constans";
+import { INITIAL_STATE_AUTH } from "@/utils/constants";
 import type { WithChildren } from "@/utils/types";
 
 export function AuthProvider({ children }: WithChildren) {
-  const [state, dispatch] = useReducer(AuthReduceer, INITIAL_STATE_AUTH);
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE_AUTH);
 
   // verificacion de usuario
   useEffect(() => {
@@ -16,7 +16,7 @@ export function AuthProvider({ children }: WithChildren) {
       if (user) {
         dispatch({ type: "ADD_USER", payload: user });
       } else {
-        cleadState();
+        cleanState();
       }
     });
 
@@ -27,20 +27,25 @@ export function AuthProvider({ children }: WithChildren) {
     };
   }, []);
 
-  const setLoading = (value: boolean) => {
+  const setLoading = useCallback((value: boolean) => {
     dispatch({ type: "SET_LOADING", payload: value });
-  };
+  }, []);
 
-  const cleadState = () => {
+  const cleanState = useCallback(() => {
     dispatch({ type: "CLEAN_STATE" });
-  };
+  }, []);
 
-  const updateUser = (payload: { name: string }) => {
+  const updateUser = useCallback((payload: { name: string }) => {
     dispatch({ type: "UPDATE_USER", payload });
-  };
+  }, []);
+
+  const value = useMemo(
+    () => ({ ...state, setLoading, cleanState, updateUser }),
+    [state, setLoading, cleanState, updateUser]
+  );
 
   return (
-    <AuthContext.Provider value={{ ...state, setLoading, cleadState, updateUser }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

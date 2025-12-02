@@ -4,7 +4,7 @@ import NotFound from "@/components/NotFound";
 import NotNotes from "@/components/NotNotes";
 import { useNotes } from "@/context/notes/NotesContext";
 import "@/styles/home.css";
-import { INITIAL_MODAL } from "@/utils/constans";
+import { INITIAL_MODAL } from "@/utils/constants";
 import type { Note, TypeModalDeleteData } from "@/utils/types";
 import { CopyPlus } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ export const Home = () => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value.toLowerCase();
-    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchTerm));
+    const filteredNotes = notes.filter((note: Note) => note.title.toLowerCase().includes(searchTerm));
     const sortedNotes = handleSortedNotesPinned(filteredNotes);
     setSearch(sortedNotes);
   };

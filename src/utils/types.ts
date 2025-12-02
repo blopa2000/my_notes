@@ -18,7 +18,7 @@ export interface WithChildren {
 
 export type AuthContextType = StateUser & {
   setLoading: (value: boolean) => void;
-  cleadState: () => void;
+  cleanState: () => void;
   updateUser: (payload: { name: string }) => void;
 };
 
@@ -57,7 +57,7 @@ export type NotesContextType = StateNotes & {
   setNotes: () => void;
   getNoteById: (id: string) => Note | undefined;
   updateColorNote: (noteId: string, bgColor: string) => void;
-  updatePinnedNote:(noteId: string, pinned: boolean) => void;
+  updatePinnedNote: (noteId: string, pinned: boolean) => void;
 };
 
 export type TiptapEditorProps = {

@@ -3,20 +3,20 @@ import type { AuthContextType, NotesContextType, TypeModalDeleteData } from "./t
 export const INITIAL_STATE_AUTH: AuthContextType = {
   user: null,
   loading: true,
-  setLoading: () => {},
-  cleadState: () => {},
-  updateUser: () => {},
+  setLoading: () => { },
+  cleanState: () => { },
+  updateUser: () => { },
 };
 
 export const INITIAL_STATE_NOTES: NotesContextType = {
   notes: [],
-  addNote: () => {},
-  updateNote: () => {},
-  deleteNote: () => {},
-  setNotes: () => {},
+  addNote: () => { },
+  updateNote: () => { },
+  deleteNote: () => { },
+  setNotes: () => { },
   getNoteById: () => undefined,
-  updateColorNote: () => {},
-  updatePinnedNote: () => {},
+  updateColorNote: () => { },
+  updatePinnedNote: () => { },
 };
 
 export const INITIAL_MODAL: TypeModalDeleteData = {

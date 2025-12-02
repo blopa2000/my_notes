@@ -1,7 +1,7 @@
-import { INITIAL_STATE_AUTH } from "@/utils/constans";
+import { INITIAL_STATE_AUTH } from "@/utils/constants";
 import type { Action, StateUser } from "@/utils/types";
 
-export const AuthReduceer = (state: StateUser = INITIAL_STATE_AUTH, action: Action) => {
+export const AuthReducer = (state: StateUser = INITIAL_STATE_AUTH, action: Action) => {
   const { type } = action;
   switch (type) {
     case "CLEAN_STATE":

@@ -4,7 +4,7 @@ import { NotesReducer } from "./NotesReducer";
 import { noteService } from "@/services/noteService";
 import { useAuth } from "../auth/AuthContext";
 import type { Note, WithChildren } from "@/utils/types";
-import { INITIAL_STATE_NOTES } from "@/utils/constans";
+import { INITIAL_STATE_NOTES } from "@/utils/constants";
 
 export const NotesProvider = ({ children }: WithChildren) => {
   const [state, dispatch] = useReducer(NotesReducer, INITIAL_STATE_NOTES);

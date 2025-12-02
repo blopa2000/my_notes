@@ -1,5 +1,5 @@
 import type { Note, StateNotes } from "../../utils/types";
-import { INITIAL_STATE_NOTES } from "../../utils/constans";
+import { INITIAL_STATE_NOTES } from "../../utils/constants";
 
 export type NotesAction =
   | { type: "SET_NOTES"; payload: Note[] }

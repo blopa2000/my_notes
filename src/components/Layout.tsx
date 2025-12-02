@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 
-export const Layount = () => {
+export const Layout = () => {
   return (
     <div>
       <Navbar />

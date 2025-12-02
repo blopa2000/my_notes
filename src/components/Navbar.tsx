@@ -8,7 +8,7 @@ import { useNotes } from "../context/notes/NotesContext";
 import ModalProfile from "./ModalProfile";
 
 const Navbar = () => {
-  const { setLoading, cleadState } = useAuth();
+  const { setLoading, cleanState } = useAuth();
   const { setNotes } = useNotes();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await authService.signOutRequest();
-      cleadState();
+      cleanState();
       setNotes();
       setLoading(false);
     } catch (error) {

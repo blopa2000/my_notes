@@ -1,5 +1,5 @@
 import "@/styles/popoverColor.css";
-import { BACKGROUND_COLORS } from "@/utils/constans";
+import { BACKGROUND_COLORS } from "@/utils/constants";
 import { CircleOff, LoaderCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
 

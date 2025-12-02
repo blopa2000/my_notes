@@ -4,7 +4,7 @@ import { noteService } from "@/services/noteService";
 import { useAuth } from "@/context/auth/AuthContext";
 import { useState } from "react";
 import type { TypeModalDeleteData } from "@/utils/types";
-import { INITIAL_MODAL } from "@/utils/constans";
+import { INITIAL_MODAL } from "@/utils/constants";
 import Modal from "./Modal";
 
 type TypeModalDelete = {
