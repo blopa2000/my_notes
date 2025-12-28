@@ -22,6 +22,22 @@ export function QuillEditor({ value, onChange }: TiptapEditorProps) {
     });
   }, [value]);
 
+  useEffect(() => {
+    const editor = document.querySelector(".ql-editor");
+
+    if (!editor) return;
+
+    const preventScroll = (e: Event) => {
+      e.stopPropagation();
+    };
+
+    editor.addEventListener("scroll", preventScroll, true);
+
+    return () => {
+      editor.removeEventListener("scroll", preventScroll, true);
+    };
+  }, []);
+
   return (
     <ReactQuill
       ref={quillRef}

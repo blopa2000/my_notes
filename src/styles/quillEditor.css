@@ -41,6 +41,10 @@
   margin: 10px 0px;
 }
 
+.ql-editor p span,em{
+  padding: 5px;
+}
+
 .ql-editor h1,
 .ql-editor h2,
 .ql-editor h3,
