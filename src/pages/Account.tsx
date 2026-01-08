@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { authService } from "@/services/authService";
-import { useAuth } from "@/context/auth/AuthContext";
-import { useNavigate } from "react-router";
-import toast from "react-hot-toast";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import LoginImg from "@/assets/login.png";
-import "@/styles/account.css";
-import { Key, Mail, User } from "lucide-react";
-import ModalRecoverPassword from "@/components/ModalRecoverPassword";
+import { useEffect, useState } from 'react';
+import { authService } from '@/services/authService';
+import { useAuth } from '@/context/auth/AuthContext';
+import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import LoginImg from '@/assets/login.png';
+import '@/styles/account.css';
+import { Key, Mail, User } from 'lucide-react';
+import ModalRecoverPassword from '@/components/ModalRecoverPassword';
 
 interface FormValues {
   name: string;
@@ -24,22 +24,22 @@ export const Account = () => {
   const navigate = useNavigate();
 
   const initialValues: FormValues = {
-    email: "",
-    password: "",
-    name: "",
+    email: '',
+    password: '',
+    name: '',
   };
 
   const getValidationSchema = (isLogin: boolean) =>
     Yup.object().shape({
-      email: Yup.string().email("El correo no es válido").required("El correo es obligatorio"),
+      email: Yup.string().email('El correo no es válido').required('El correo es obligatorio'),
       password: Yup.string()
-        .min(9, "La contraseña debe tener al menos 9 caracteres")
-        .required("La contraseña es obligatoria"),
+        .min(9, 'La contraseña debe tener al menos 9 caracteres')
+        .required('La contraseña es obligatoria'),
       name: isLogin
         ? Yup.string().notRequired()
         : Yup.string()
-            .min(5, "El nombre debe tener al menos 5 caracteres")
-            .required("El nombre es obligatorio"),
+            .min(5, 'El nombre debe tener al menos 5 caracteres')
+            .required('El nombre es obligatorio'),
     });
 
   const handleSubmit = async (values: FormValues) => {
@@ -51,30 +51,31 @@ export const Account = () => {
         await authService.signupRequest(values.email, values.password, values.name);
       }
     } catch (error) {
-      if (error instanceof Error && "code" in error) {
+      setLoading(false);
+      if (error instanceof Error && 'code' in error) {
         const err = error as { code?: string; message: string };
         switch (err.code) {
-          case "auth/email-already-in-use":
-            toast.error("El correo ya está en uso");
+          case 'auth/email-already-in-use':
+            toast.error('El correo ya está en uso');
             break;
-          case "auth/invalid-email":
-            toast.error("Correo inválido");
+          case 'auth/invalid-email':
+            toast.error('Correo inválido');
             break;
-          case "auth/weak-password":
-            toast.error("Contraseña demasiado débil");
+          case 'auth/weak-password':
+            toast.error('Contraseña demasiado débil');
             break;
-          case "auth/user-not-found":
-            toast.error("Usuario no encontrado");
+          case 'auth/user-not-found':
+            toast.error('Usuario no encontrado');
             break;
-          case "auth/wrong-password":
-            toast.error("Contraseña incorrecta");
+          case 'auth/wrong-password':
+            toast.error('Contraseña incorrecta');
             break;
           default:
             toast.error(err.message);
             break;
         }
       } else {
-        toast.error("Ocurrió un error inesperado");
+        toast.error('Ocurrió un error inesperado');
       }
     }
   };
@@ -83,14 +84,14 @@ export const Account = () => {
   const handleChangeIsLogin = () => {
     if (window.innerWidth <= 1050) {
       setLoading(true);
-      setIsLogin((pre) => !pre);
+      setIsLogin(pre => !pre);
       setTimeout(() => {
         setLoading(false);
       }, 400);
     } else {
-      setChangeMode((pre) => !pre);
+      setChangeMode(pre => !pre);
       setTimeout(() => {
-        setIsLogin((pre) => !pre);
+        setIsLogin(pre => !pre);
       }, 400);
     }
   };
@@ -101,7 +102,7 @@ export const Account = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate('/dashboard');
     }
   }, [user, navigate]);
 
@@ -111,9 +112,9 @@ export const Account = () => {
     <>
       {showModal && <ModalRecoverPassword toggleshowModalDelete={toggleshowModalDelete} />}
 
-      <div className={`account-page ${changeMode ? "login-mode" : "signup-mode"}`}>
+      <div className={`account-page ${changeMode ? 'login-mode' : 'signup-mode'}`}>
         <div className="card-Account">
-          <h2>{isLogin ? "Inicia sesión en tu cuenta" : "Crea una cuenta nueva"}</h2>
+          <h2>{isLogin ? 'Inicia sesión en tu cuenta' : 'Crea una cuenta nueva'}</h2>
           <Formik
             initialValues={initialValues}
             validationSchema={getValidationSchema(isLogin)}
@@ -168,7 +169,7 @@ export const Account = () => {
           </Formik>
 
           <button onClick={handleChangeIsLogin}>
-            {isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
+            {isLogin ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión'}
           </button>
           {isLogin && <button onClick={toggleshowModalDelete}>Recuperar Contraseña</button>}
         </div>
