@@ -1,7 +1,7 @@
-import "@/styles/popoverColor.css";
-import { BACKGROUND_COLORS } from "@/utils/constants";
-import { CircleOff, LoaderCircle } from "lucide-react";
-import { useEffect, useRef } from "react";
+import '@/styles/popoverColor.css';
+import { BACKGROUND_COLORS } from '@/utils/constants';
+import { CircleOff, LoaderCircle } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 type TypePopoverColor = {
   ButtonColorRef: React.RefObject<HTMLButtonElement | null>;
@@ -34,29 +34,29 @@ const PopoverColor = ({
       }
     };
 
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
   }, [closeColor, ButtonColorRef]);
 
   return (
     <>
-      <div className={`popover-container ${showColors ? "active" : ""}`} ref={popoverRef}>
+      <div className={`popover-container ${showColors ? 'active' : ''}`} ref={popoverRef}>
         <button onClick={() => handleChangeColor(undefined)} className="btn-circle btn-not-color">
           <CircleOff />
         </button>
 
-        {BACKGROUND_COLORS.map((color) => (
+        {BACKGROUND_COLORS.map(color => (
           <button
             key={color}
             onClick={() => handleChangeColor(color)}
-            className={`btn-circle btn-color ${colorNote === color ? "btn-color-selection" : ""}`}
+            className={`btn-circle btn-color ${colorNote === color ? 'btn-color-selection' : ''}`}
             style={{ background: color }}
           />
         ))}
       </div>
       <div
         className="loading-container-color"
-        style={loading ? { display: "block" } : { display: "none" }}
+        style={loading ? { display: 'block' } : { display: 'none' }}
       >
         <LoaderCircle className="loading-color" />
       </div>

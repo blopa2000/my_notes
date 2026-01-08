@@ -1,5 +1,8 @@
-# Firebase config
-Create a folder called ``firebase`` and try creating the file ``config.ts`` and copy the following
+# Configurations to run
+
+## Firebase config
+
+Create a folder called `firebase` and try creating the file `config.ts` and copy the following
 
 ```
 // src/firebase/config.js
@@ -27,7 +30,26 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
+```
 
+## Clone and run the container
+
+Before cloning, have Docker installed
+
+```
+git clone https://github.com/blopa2000/my_notes.git
+cd my_notes
+docker compose up
+```
+
+## Execution of the build
+
+we entered the container docker
+
+```
+docker compose exec -it app sh
+/app # ls -al
+/app # npm run build
 ```
 
 # React + TypeScript + Vite
@@ -72,15 +94,15 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -101,5 +123,5 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```

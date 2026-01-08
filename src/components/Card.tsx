@@ -1,21 +1,21 @@
-import { Palette, Trash, Pin, PinOff } from "lucide-react";
-import "../styles/card.css";
-import type { TypeModalDeleteData, Note } from "../utils/types";
-import { useNavigate } from "react-router";
-import PopoverColor from "./PopoverColor";
-import { useRef, useState } from "react";
-import { noteService } from "@/services/noteService";
-import { useAuth } from "@/context/auth/AuthContext";
-import { useNotes } from "@/context/notes/NotesContext";
+import { Palette, Trash, Pin, PinOff } from 'lucide-react';
+import '../styles/card.css';
+import type { TypeModalDeleteData, Note } from '../utils/types';
+import { useNavigate } from 'react-router';
+import PopoverColor from './PopoverColor';
+import { useRef, useState } from 'react';
+import { noteService } from '@/services/noteService';
+import { useAuth } from '@/context/auth/AuthContext';
+import { useNotes } from '@/context/notes/NotesContext';
 
 const getTextColor = (bgColor: string) => {
-  if (!bgColor) return "#222";
-  const hex = bgColor.replace("#", "");
+  if (!bgColor) return '#222';
+  const hex = bgColor.replace('#', '');
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-  return brightness > 150 ? "#222" : "#fff";
+  return brightness > 150 ? '#222' : '#fff';
 };
 
 type TypeCard = {
@@ -49,7 +49,7 @@ const Card = ({ toggleshowModalDelete, note }: TypeCard) => {
 
   const handleColor = (e: React.FormEvent) => {
     e.stopPropagation();
-    setShowColors((prev) => !prev);
+    setShowColors(prev => !prev);
   };
 
   const handleDeleteNote = (e: React.FormEvent) => {
@@ -57,7 +57,7 @@ const Card = ({ toggleshowModalDelete, note }: TypeCard) => {
     toggleshowModalDelete({ showModal: true, modalNoteId: noteId });
   };
 
-  const handleChangeColor = async (color: string | undefined = "#ffffff") => {
+  const handleChangeColor = async (color: string | undefined = '#ffffff') => {
     if (user?.uid) {
       if (color !== bgColor) {
         setloading(true);
@@ -73,12 +73,12 @@ const Card = ({ toggleshowModalDelete, note }: TypeCard) => {
       <div
         onClick={() => handleCardClick(noteId)}
         style={{ background: bgColor, color: textColor, zIndex: 2 }}
-        className={`card ${pinned ? "card-pinned" : ""}`}
+        className={`card ${pinned ? 'card-pinned' : ''}`}
       >
         <div className="card-info-Container">
           <div className="card-info-header">
             <button
-              className={`card-btn  ${pinned ? "pinned" : "over-pinned"}`}
+              className={`card-btn  ${pinned ? 'pinned' : 'over-pinned'}`}
               onClick={handlePinNote}
             >
               {pinned ? <PinOff /> : <Pin />}
