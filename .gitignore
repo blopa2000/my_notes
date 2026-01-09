@@ -9,7 +9,7 @@
 ### Firebase Patch ###
 .runtimeconfig.json
 .firebase/
-src/firebase/config.ts
+
 
 ### Linux ###
 *~
