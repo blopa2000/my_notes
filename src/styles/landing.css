@@ -152,3 +152,9 @@
     background-size: inherit
   }
 }
+
+@media (max-width:500px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+}
