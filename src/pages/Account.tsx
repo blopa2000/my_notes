@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import LoginImg from '@/assets/login.png';
+import loginImg from '@/assets/login.jpeg';
 import '@/styles/account.css';
 import { Key, Mail, User } from 'lucide-react';
 import ModalRecoverPassword from '@/components/ModalRecoverPassword';
@@ -38,8 +38,8 @@ export const Account = () => {
       name: isLogin
         ? Yup.string().notRequired()
         : Yup.string()
-            .min(5, 'El nombre debe tener al menos 5 caracteres')
-            .required('El nombre es obligatorio'),
+          .min(5, 'El nombre debe tener al menos 5 caracteres')
+          .required('El nombre es obligatorio'),
     });
 
   const handleSubmit = async (values: FormValues) => {
@@ -174,7 +174,7 @@ export const Account = () => {
           {isLogin && <button onClick={toggleshowModalDelete}>Recuperar Contraseña</button>}
         </div>
         <div className="img-container">
-          <img src={LoginImg} alt="login-img" />
+          <img src={loginImg} alt="Login illustration" />
         </div>
       </div>
     </>

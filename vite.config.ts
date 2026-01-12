@@ -17,4 +17,15 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router'],
+          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+          editor: ['react-quill-new', 'quill'],
+        },
+      },
+    },
+  },
 });

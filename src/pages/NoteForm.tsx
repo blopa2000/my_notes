@@ -93,7 +93,11 @@ export const NoteForm = () => {
       <h1 className="edit-title">{noteId ? "Editar Nota" : "Nueva Nota"}</h1>
 
       <div className="edit-box">
-        <button className="back-btn" onClick={() => navigate("/dashboard")}>
+        <button
+          className="back-btn"
+          onClick={() => navigate("/dashboard")}
+          aria-label="Back to dashboard"
+        >
           <ArrowLeft size={22} />
         </button>
 
@@ -115,6 +119,7 @@ export const NoteForm = () => {
                 type="color"
                 className="edit-form-color"
                 value={values.bgColor}
+                aria-label="Background color"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setFieldValue("bgColor", e.target.value)
                 }

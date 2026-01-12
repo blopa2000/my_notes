@@ -65,20 +65,24 @@ const Navbar = () => {
           <h1 className="navbar-title">My Notes</h1>
         </Link>
         <div className="navbar-container" ref={menuRef}>
-          <button className="navbar-button" onClick={() => setOpen((prev: boolean) => !prev)}>
+          <button
+            className="navbar-button"
+            onClick={() => setOpen((prev: boolean) => !prev)}
+            aria-label="Menu"
+          >
             <Menu size={30} />
           </button>
 
           <div className={`navbar-dropdown ${open ? "show" : ""}`}>
             <button className="navbar-item" onClick={toggleModalProfile}>
-              <User /> <h2>Perfil</h2>
+              <User /> <span>Perfil</span>
             </button>
             <button className="navbar-item" onClick={toggleTheme}>
               {theme === "dark" ? <Sun /> : <Moon />}{" "}
-              <h2>{theme === "dark" ? "Modo claro" : "Modo oscuro"}</h2>
+              <span>{theme === "dark" ? "Modo claro" : "Modo oscuro"}</span>
             </button>
             <button className="navbar-item logout" onClick={handleLogout}>
-              <LogOut /> <h2>Cerrar sesión</h2>
+              <LogOut /> <span>Cerrar sesión</span>
             </button>
           </div>
         </div>

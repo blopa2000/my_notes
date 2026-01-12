@@ -1,11 +1,10 @@
-import { useEffect, useRef } from "react";
-import ReactQuill from "react-quill-new";
-import type { TiptapEditorProps } from "@/utils/types";
-import { registerQuill } from "@/utils/registerQuill";
-import { quillModules, quillFormats } from "@/utils/quillModules";
-import "react-quill-new/dist/quill.snow.css";
-import "@/styles/quillEditor.css";
-import "highlight.js/styles/github.css";
+import { useEffect, useRef } from 'react';
+import ReactQuill from 'react-quill-new';
+import type { TiptapEditorProps } from '@/utils/types';
+import { registerQuill } from '@/utils/registerQuill';
+import { quillModules, quillFormats } from '@/utils/quillModules';
+import 'react-quill-new/dist/quill.snow.css';
+import '@/styles/quillEditor.css';
 
 export function QuillEditor({ value, onChange }: TiptapEditorProps) {
   const quillRef = useRef<ReactQuill | null>(null);
@@ -15,7 +14,7 @@ export function QuillEditor({ value, onChange }: TiptapEditorProps) {
   }, []);
 
   useEffect(() => {
-    const editor = document.querySelector(".ql-editor");
+    const editor = document.querySelector('.ql-editor');
 
     if (!editor) return;
 
@@ -23,10 +22,10 @@ export function QuillEditor({ value, onChange }: TiptapEditorProps) {
       e.stopPropagation();
     };
 
-    editor.addEventListener("scroll", preventScroll, true);
+    editor.addEventListener('scroll', preventScroll, true);
 
     return () => {
-      editor.removeEventListener("scroll", preventScroll, true);
+      editor.removeEventListener('scroll', preventScroll, true);
     };
   }, []);
 
